@@ -1,2 +1,23 @@
-const audioContext=new AudioContext();let sourceA,sourceB,mixedBuffer,mixedSource,channelsReversed;const loadAudio=e=>{return new Promise((t,a)=>{const o=new XMLHttpRequest;o.open("GET",e,!0),o.responseType="arraybuffer",o.onload=()=>{200===o.status?audioContext.decodeAudioData(o.response,t,a):a(new Error(`Failed to load audio: ${o.status}`))},o.onerror=()=>{a(new Error(`Failed to load audio: ${o.status}`))},o.send()})};const mixAudio=()=>{const e=Math.max(sourceA.length,sourceB.length),t=audioContext.createBuffer(2,e,audioContext.sampleRate),o=t.getChannelData(0),n=t.getChannelData(1);for(let a=0;a<e;a++)o[a]=sourceA.getChannelData(0)[a%sourceA.length],n[a]=sourceB.getChannelData(1)[a%sourceB.length];mixedBuffer=t};const playMixed=()=>{mixedSource=audioContext.createBufferSource(),mixedSource.buffer=mixedBuffer,mixedSource.connect(audioContext.destination),mixedSource.start()};const pauseMixed=()=>{mixedSource.stop()};const reverseChannels=()=>{channelsReversed=!channelsReversed};
+var songA = document.getElementById("songA");
+var songB = document.getElementById("songB");
 
+var playAButton = document.getElementById("playA");
+var pauseAButton = document.getElementById("pauseA");
+var playBButton = document.getElementById("playB");
+var pauseBButton = document.getElementById("pauseB");
+
+playAButton.addEventListener("click", function() {
+	songA.play();
+});
+
+pauseAButton.addEventListener("click", function() {
+	songA.pause();
+});
+
+playBButton.addEventListener("click", function() {
+	songB.play();
+});
+
+pauseBButton.addEventListener("click", function() {
+	songB.pause();
+});
