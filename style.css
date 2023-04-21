@@ -1,26 +1,21 @@
-.container {
+#mixer {
   max-width: 600px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
-h1 {
-  margin-top: 0;
+#progress-bar {
+  margin: 20px 0;
+  background-color: #ddd;
+  height: 10px;
+  position: relative;
 }
 
-form {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem 0;
+#progress {
+  background-color: #06f;
+  height: 100%;
 }
 
-label {
-  display: block;
-  margin-right: 1rem;
-  font-size: 1.2rem;
+button {
+  margin: 0 10px;
 }
-
-input[type="file"]
