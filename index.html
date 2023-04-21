@@ -1,39 +1,111 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Audio Mixer</title>
-  </head>
-  <body>
-    <form>
-      <label for="file1">Select file 1:</label>
-      <input type="file" id="file1"><br>
-      <label for="file2">Select file 2:</label>
-      <input type="file" id="file2"><br>
-      <button type="submit">Mix audio</button>
-    </form>
-    <div id="progress"></div>
-    <button id="play">Play</button>
-    <button id="pause">Pause</button>
-    <button id="swap">Swap channels</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.18/Tone.min.js"></script>
-    <script>
-      const form = document.querySelector('form');
-      const file1 = document.querySelector('#file1');
-      const file2 = document.querySelector('#file2');
-      const progress = document.querySelector('#progress');
-      const playButton = document.querySelector('#play');
-      const pauseButton = document.querySelector('#pause');
-      const swapButton = document.querySelector('#swap');
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Mixer</title>
+  <script src="https://unpkg.com/tone"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input[type="file"] {
+      margin-top: 0.5rem;
+    }
+    button {
+      margin-top: 1rem;
+    }
+    progress {
+      width: 100%;
+      height: 1rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Audio Mixer</h1>
+  <form>
+    <label for="fileA">Select audio file A:</label>
+    <input type="file" id="fileA" accept="audio/*">
 
-      let buffer;
-      let source;
-      let context;
+    <label for="fileB">Select audio file B:</label>
+    <input type="file" id="fileB" accept="audio/*">
 
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const files = [file1.files[0], file2.files[0]];
-        context = new AudioContext();
-        const mixer = context.createGain();
-        mixer.gain.setValueAtTime(1, 0);
-        const filePromises = files
+    <button type="button" id="mixButton">Mix audio</button>
+    <button type="button" id="playButton">Play</button>
+    <button type="button" id="pauseButton">Pause</button>
+    <button type="button" id="switchButton">Switch channels</button>
+
+    <progress id="progressBar" max="1"></progress>
+  </form>
+
+  <script>
+    const fileA = document.getElementById("fileA").files[0];
+    const fileB = document.getElementById("fileB").files[0];
+
+    const readerA = new FileReader();
+    readerA.readAsArrayBuffer(fileA);
+
+    const readerB = new FileReader();
+    readerB.readAsArrayBuffer(fileB);
+
+    Promise.all([readerA, readerB])
+      .then(([bufferA, bufferB]) => {
+        const context = new Tone.Context();
+        const sourceA = new Tone.BufferSource(bufferA);
+        const sourceB = new Tone.BufferSource(bufferB);
+        const merger = new Tone.Merge();
+
+        sourceA.connect(merger.left);
+        sourceB.connect(merger.right);
+        merger.connect(context.destination);
+
+        sourceA.on("load", () => {
+          console.log("File A loaded");
+          updateProgress();
+        });
+        sourceB.on("load", () => {
+          console.log("File B loaded");
+          updateProgress();
+        });
+        context.on("tick", () => {
+          updateProgress();
+        });
+
+        const playButton = document.getElementById("playButton");
+        playButton.addEventListener("click", () => {
+          Tone.Transport.start();
+        });
+        const pauseButton = document.getElementById("pauseButton");
+        pauseButton.addEventListener("click", () => {
+          Tone.Transport.stop();
+        });
+
+        const switchButton = document.getElementById("switchButton");
+        switchButton.addEventListener("click", () => {
+          merger.disconnect();
+          merger.connect(context.destination, 0, 1);
+        });
+
+        const mixButton = document.getElementById("mixButton");
+        mixButton.addEventListener("click", () => {
+          Tone.Transport.cancel();
+          Tone.Transport.seconds = 0;
+          sourceA.start(0);
+          sourceB.start(0);
+        });
+
+        function updateProgress() {
+          const progress = Tone.Transport.progress;
+          const progressBar = document.getElementById("progressBar");
+          progressBar.value = progress;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  </script>
+</body>
