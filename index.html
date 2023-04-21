@@ -1,36 +1,24 @@
 <!DOCTYPE html>
-<!-- version2 -->
+<!-- version3 -->
 <html>
 <head>
-	<title>Audio Mixer</title>
-	<link rel="stylesheet" href="style.css">
+	<title>Audio Player</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<h1>Audio Mixer</h1>
-
-	<div>
-		<label for="songA">Song A:</label>
-		<audio id="songA" src="songA.mp3"></audio>
-		<button id="playSongA">Play</button>
-		<button id="pauseSongA">Pause</button>
+	<div class="container">
+		<h1>Audio Player</h1>
+		<div class="audio">
+			<audio id="songA" src="SongA.mp3"></audio>
+			<audio id="songB" src="SongB.mp3"></audio>
+			<div class="controls">
+				<button id="playA">Play Song A</button>
+				<button id="pauseA">Pause Song A</button>
+				<button id="playB">Play Song B</button>
+				<button id="pauseB">Pause Song B</button>
+			</div>
+		</div>
 	</div>
-
-	<div>
-		<label for="songB">Song B:</label>
-		<audio id="songB" src="songB.mp3"></audio>
-		<button id="playSongB">Play</button>
-		<button id="pauseSongB">Pause</button>
-	</div>
-
-	<div>
-		<label for="mixedAudio">Mixed Audio:</label>
-		<audio id="mixedAudio"></audio>
-		<button id="playMixedAudio">Play</button>
-		<button id="pauseMixedAudio">Pause</button>
-		<button id="switchChannels">Switch Channels</button>
-		<div id="loadingBar"></div>
-	</div>
-
-	<script src="script.js"></script>
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
