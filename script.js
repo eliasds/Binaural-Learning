@@ -7,17 +7,23 @@ var playBButton = document.getElementById("playB");
 var pauseBButton = document.getElementById("pauseB");
 
 playAButton.addEventListener("click", function() {
-	songA.play();
+    console.log("Play Song A clicked");
+    songA.currentTime = 0;
+    songA.play();
 });
 
 pauseAButton.addEventListener("click", function() {
-	songA.pause();
+    console.log("Pause Song A clicked");
+    songA.pause();
 });
 
 playBButton.addEventListener("click", function() {
-	songB.play();
+    console.log("Play Song B clicked");
+    songB.currentTime = 0;
+    songB.play();
 });
 
 pauseBButton.addEventListener("click", function() {
-	songB.pause();
+    console.log("Pause Song B clicked");
+    songB.pause();
 });
