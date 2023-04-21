@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>My Audio Mixer</title>
-</head>
-<body>
-  <input type="file" id="fileA">
-  <input type="file" id="fileB">
-  <button id="mixButton">Mix</button>
-  <button id="swapButton">Swap Channels</button>
-  <button id="playButton">Play</button>
+  <head>
+    <title>Audio Mixer</title>
+  </head>
+  <body>
+    <h1>Audio Mixer</h1>
+    <label for="fileA">Select audio file A:</label>
+    <input type="file" id="fileA"><br><br>
+    <label for="fileB">Select audio file B:</label>
+    <input type="file" id="fileB"><br><br>
+    <button id="mixButton">Mix Audio</button>
+    <button id="swapButton">Swap Channels</button>
+    <button id="playButton">Play Mixed Audio</button>
+    <br><br>
+    <progress id="progressBar" max="100" value="0">Waiting</progress>
 
-  <script src="https://unpkg.com/@tonejs/tone@14.8.26/build/Tone.js"></script>
-  <script src="my-mixer-script.js"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.24/Tone.js"></script>
+    <script>
+      // JavaScript code goes here
+    </script>
+  </body>
 </html>
