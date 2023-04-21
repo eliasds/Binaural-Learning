@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<! version2 >
+<!-- version2 -->
 <html>
 <head>
-	<title>Song Mixing Example</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.min.js"></script>
-	<script src="index.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Audio Mixer</title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<h1>Song Mixing Example</h1>
-	<form>
-		<label>Select Song A:</label>
-		<input type="file" id="fileInputA" accept=".mp3, .wav" required>
-		<br><br>
-		<label>Select Song B:</label>
-		<input type="file" id="fileInputB" accept=".mp3, .wav" required>
-		<br><br>
-		<button id="mixButton">Mix Songs</button>
-		<button id="playButtonA">Play Song A</button>
-		<button id="playButtonB">Play Song B</button>
-	</form>
-	<div id="progressBar">
-		<div id="progress"></div>
-	</div>
+	<h1>Audio Mixer</h1>
+
 	<div>
-		<button id="playLeftButton">Play Left Channel</button>
-		<button id="playRightButton">Play Right Channel</button>
+		<label for="songA">Song A:</label>
+		<audio id="songA" src="songA.mp3"></audio>
+		<button id="playSongA">Play</button>
+		<button id="pauseSongA">Pause</button>
 	</div>
+
+	<div>
+		<label for="songB">Song B:</label>
+		<audio id="songB" src="songB.mp3"></audio>
+		<button id="playSongB">Play</button>
+		<button id="pauseSongB">Pause</button>
+	</div>
+
+	<div>
+		<label for="mixedAudio">Mixed Audio:</label>
+		<audio id="mixedAudio"></audio>
+		<button id="playMixedAudio">Play</button>
+		<button id="pauseMixedAudio">Pause</button>
+		<button id="switchChannels">Switch Channels</button>
+		<div id="loadingBar"></div>
+	</div>
+
+	<script src="script.js"></script>
 </body>
 </html>
