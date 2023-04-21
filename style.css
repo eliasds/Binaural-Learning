@@ -1,21 +1,17 @@
-#mixer {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
+.container {
+	margin: auto;
+	max-width: 600px;
 }
 
-#progress-bar {
-  margin: 20px 0;
-  background-color: #ddd;
-  height: 10px;
-  position: relative;
+.audio {
+	margin-top: 50px;
 }
 
-#progress {
-  background-color: #06f;
-  height: 100%;
+.controls {
+	margin-top: 20px;
 }
 
 button {
-  margin: 0 10px;
+	padding: 10px 20px;
+	margin-right: 10px;
 }
