@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tone.js Audio Mixing Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.0.1/Tone.min.js"></script>
+</head>
+<body>
+  <h1>Tone.js Audio Mixing Example</h1>
+  <input type="file" id="fileA">
+  <input type="file" id="fileB">
+  <button id="mixButton">Mix Audio</button>
+  <button id="swapButton">Swap Channels</button>
+  <br><br>
+  <audio id="player" controls></audio>
+  <script>
+    const player = new Tone.Player().toDestination();
+    let fileA, fileB;
+
+    document.getElementById('fileA').addEventListener('change', function (e) {
+      fileA = URL.createObjectURL(e.target.files[0]);
+    });
+
+    document.getElementById('fileB').addEventListener('change', function (e) {
+      fileB = URL.createObjectURL(e.target.files[0]);
+    });
+
+    document.getElementById('mixButton').addEventListener('click', function () {
+      if (!fileA || !fileB) {
+        alert('Please select two audio files.');
+        return;
+      }
+      const mixer = new Tone.Channel({
+        pan: 0.5,
+        volume: -10
+      });
+      const sourceA = new Tone.Player(fileA).connect(mixer.left);
+      const sourceB = new Tone.Player(fileB).connect(mixer.right);
+      mixer.toDestination();
+      sourceA.start();
+      sourceB.start();
+    });
+
+    document.getElementById('swapButton').addEventListener('click', function () {
+      const pan = player.pan.value;
+      player.pan.value = -pan;
+    });
+
+    player.sync().start();
+  </script>
+</body>
+</html>
