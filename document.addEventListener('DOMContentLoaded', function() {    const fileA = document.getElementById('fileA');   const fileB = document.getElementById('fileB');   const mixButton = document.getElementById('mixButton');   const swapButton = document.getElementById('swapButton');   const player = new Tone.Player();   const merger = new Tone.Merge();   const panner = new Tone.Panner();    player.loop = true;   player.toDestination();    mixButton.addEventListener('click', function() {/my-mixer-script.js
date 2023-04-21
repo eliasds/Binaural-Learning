@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const fileB = document.getElementById('fileB');
   const mixButton = document.getElementById('mixButton');
   const swapButton = document.getElementById('swapButton');
+  const playButton = document.getElementById('playButton');
   const player = new Tone.Player();
   const merger = new Tone.Merge();
   const panner = new Tone.Panner();
@@ -30,6 +31,10 @@ document.addEventListener('DOMContentLoaded', function() {
         player.start();
       });
     });
+  });
+
+  playButton.addEventListener('click', function() {
+    player.start();
   });
 
   swapButton.addEventListener('click', function() {
