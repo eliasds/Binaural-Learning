@@ -1,29 +1,36 @@
-var songA = document.getElementById("songA");
-var songB = document.getElementById("songB");
+const songA = new Tone.Player({
+  url: "SongA.mp3",
+  loop: true,
+  autostart: false
+}).toDestination().connect(new Tone.Panner(1));
 
-var playAButton = document.getElementById("playA");
-var pauseAButton = document.getElementById("pauseA");
-var playBButton = document.getElementById("playB");
-var pauseBButton = document.getElementById("pauseB");
+const songB = new Tone.Player({
+  url: "SongB.mp3",
+  loop: true,
+  autostart: false
+}).toDestination().connect(new Tone.Panner(-1));
+
+const playAButton = document.getElementById("playA");
+const pauseAButton = document.getElementById("pauseA");
+const playBButton = document.getElementById("playB");
+const pauseBButton = document.getElementById("pauseB");
 
 playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
-    songA.currentTime = 0;
-    songA.play();
+    songA.start();
 });
 
 pauseAButton.addEventListener("click", function() {
     console.log("Pause Song A clicked");
-    songA.pause();
+    songA.stop();
 });
 
 playBButton.addEventListener("click", function() {
     console.log("Play Song B clicked");
-    songB.currentTime = 0;
-    songB.play();
+    songB.start();
 });
 
 pauseBButton.addEventListener("click", function() {
     console.log("Pause Song B clicked");
-    songB.pause();
+    songB.stop();
 });
