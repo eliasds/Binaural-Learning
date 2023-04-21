@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Audio Mixer</title>
-  </head>
-  <body>
-    <h1>Audio Mixer</h1>
-    <label for="fileA">Select audio file A:</label>
-    <input type="file" id="fileA"><br><br>
-    <label for="fileB">Select audio file B:</label>
-    <input type="file" id="fileB"><br><br>
-    <button id="mixButton">Mix Audio</button>
-    <button id="swapButton">Swap Channels</button>
-    <button id="playButton">Play Mixed Audio</button>
-    <br><br>
-    <progress id="progressBar" max="100" value="0">Waiting</progress>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.24/Tone.js"></script>
-    <script>
-      // JavaScript code goes here
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Mixing Stereo Audio Files with Tone.js</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Mixing Stereo Audio Files with Tone.js</h1>
+    <form id="upload-form">
+      <label for="file-a">File A:</label>
+      <input type="file" id="file-a" name="file-a" accept="audio/*" required>
+      <label for="file-b">File B:</label>
+      <input type="file" id="file-b" name="file-b" accept="audio/*" required>
+      <button type="submit">Mix Audio</button>
+    </form>
+    <div id="progress-bar" class="progress-bar"></div>
+    <div id="output-controls">
+      <button id="play-button">Play Output</button>
+      <button id="switch-button">Switch Channels</button>
+    </div>
+  </div>
+  <script src="https://unpkg.com/tone"></script>
+  <script src="script.js"></script>
+</body>
 </html>
