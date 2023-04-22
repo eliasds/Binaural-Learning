@@ -2,6 +2,12 @@
 //const player = new Tone.Player("SongA.mp3").toDestination();
 //player.start();
 
+// Create a new oscillator and connect it to the default output destination
+const osc = new Tone.Oscillator().toDestination();
+
+// Set the frequency and start the oscillator
+osc.frequency.value = 440; // A4
+osc.start();
 
 const songA = document.getElementById("songA");
 const songB = document.getElementById("songB");
