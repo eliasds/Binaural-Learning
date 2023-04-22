@@ -47,9 +47,7 @@ slider.addEventListener('input', function (e) {
     var x = Math.sin(xDeg * (Math.PI / 180));
     wavesurfer.panner.setPosition(x, 0, 0);
 });
-wavesurfer.on('ready', function () {
-    wavesurfer.play();
-});
+
 
 /*
 const input = wavesurfer.backend.ac.createGain();
@@ -79,7 +77,8 @@ const pauseBButton = document.getElementById("pauseB");
 
 playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
-    songA.start();
+//    songA.start();
+    wavesurfer.play();
 });
 
 pauseAButton.addEventListener("click", function() {
