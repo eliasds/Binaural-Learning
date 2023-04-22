@@ -47,6 +47,9 @@ slider.addEventListener('input', function (e) {
     var x = Math.sin(xDeg * (Math.PI / 180));
     wavesurfer.panner.setPosition(x, 0, 0);
 });
+wavesurfer.on('ready', function () {
+    wavesurfer.play();
+});
 
 /*
 const input = wavesurfer.backend.ac.createGain();
