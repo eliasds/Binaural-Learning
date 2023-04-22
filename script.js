@@ -1,5 +1,4 @@
-const context = new Tone.Context();
-
+//const context = new Tone.Context();
 //const player = new Tone.Player("SongA.mp3").toDestination();
 //player.start();
 
@@ -32,7 +31,6 @@ pauseBButton.addEventListener("click", function() {
     console.log("Pause Song B clicked");
     songB.pause();
 });
-*/
 
 /*
 const songA = new Tone.Player({
