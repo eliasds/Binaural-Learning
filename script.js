@@ -1,5 +1,5 @@
 //const context = new Tone.Context();
-//const player = new Tone.Player("SongA.mp3").toDestination();
+const player = new Tone.Player("SongA.mp3").toDestination();
 //player.start();
 
 // Create a new oscillator and connect it to the default output destination
@@ -31,7 +31,7 @@ playBButton.addEventListener("click", function() {
     console.log("Play Song B clicked");
 //    songB.currentTime = 0;
 //    songB.play();
-    osc.start();
+    player.start();
 });
 
 pauseBButton.addEventListener("click", function() {
