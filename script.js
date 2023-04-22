@@ -36,7 +36,7 @@ playBButton.addEventListener("click", function() {
 
 pauseBButton.addEventListener("click", function() {
     console.log("Pause Song B clicked");
-    songB.pause();
+    osc.stop();
 });
 
 /*
