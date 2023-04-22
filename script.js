@@ -1,9 +1,9 @@
-var songA = document.getElementById("songA");
-var songB = document.getElementById("songB");
-var playAButton = document.getElementById("playA");
-var pauseAButton = document.getElementById("pauseA");
-var playBButton = document.getElementById("playB");
-var pauseBButton = document.getElementById("pauseB");
+const songA = document.getElementById("songA");
+const songB = document.getElementById("songB");
+const playAButton = document.getElementById("playA");
+const pauseAButton = document.getElementById("pauseA");
+const playBButton = document.getElementById("playB");
+const pauseBButton = document.getElementById("pauseB");
 
 playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
@@ -26,3 +26,4 @@ pauseBButton.addEventListener("click", function() {
     console.log("Pause Song B clicked");
     songB.pause();
 });
+
