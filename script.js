@@ -8,10 +8,7 @@ const player = new Tone.Player("SongA.mp3").toDestination();
 // osc.frequency.value = 440; // A4
 // osc.start();
 
-const songB = new Tone.Player("SongB.mp3", {
-//  url: "SongB.mp3",
-  loop: true,
-}).toDestination();
+const songB = new Tone.Player("SongB.mp3").toDestination();
 
 const songA = document.getElementById("songA");
 //const songB = document.getElementById("songB");
