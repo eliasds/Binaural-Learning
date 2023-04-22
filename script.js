@@ -1,14 +1,14 @@
+const context = new Tone.Context();
 const songA = new Tone.Player({
   url: "SongA.mp3",
   loop: true,
   autostart: false
-}).toDestination().connect(new Tone.Panner(1));
-
+}).connect(new Tone.Panner(1)).start();
 const songB = new Tone.Player({
   url: "SongB.mp3",
   loop: true,
   autostart: false
-}).toDestination().connect(new Tone.Panner(-1));
+}).connect(new Tone.Panner(-1)).start();
 
 const playAButton = document.getElementById("playA");
 const pauseAButton = document.getElementById("pauseA");
