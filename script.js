@@ -1,5 +1,5 @@
 //const context = new Tone.Context();
-//const player = new Tone.Player("SongA.mp3").toDestination();
+const player = new Tone.Player("SongA.mp3").toDestination();
 //player.start();
 
 // Create a new oscillator and connect it to the default output destination
@@ -19,12 +19,14 @@ const pauseBButton = document.getElementById("pauseB");
 playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
 //    songA.currentTime = 0;
-    songA.play();
+//    songA.play();
+    player.start();
 });
 
 pauseAButton.addEventListener("click", function() {
     console.log("Pause Song A clicked");
-    songA.pause();
+//    songA.pause();
+    player.stop();
 });
 
 playBButton.addEventListener("click", function() {
