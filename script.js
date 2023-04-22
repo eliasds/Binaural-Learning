@@ -4,7 +4,7 @@ const osc = new Tone.Oscillator().toDestination();
 osc.frequency.value = 440; // A4
 // osc.start();
 
-const songA = new Tone.Player("SongA.mp3",{playbackRate: 1.5}).toDestination();
+const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
 const songB = new Tone.Player("SongB.mp3").toDestination();
 //const songA = document.getElementById("songA");
 //const songB = document.getElementById("songB");
@@ -12,6 +12,13 @@ const playAButton = document.getElementById("playA");
 const pauseAButton = document.getElementById("pauseA");
 const playBButton = document.getElementById("playB");
 const pauseBButton = document.getElementById("pauseB");
+
+// Create a new player with a stereo audio file
+const player = new Tone.Player("SongB.mp3");
+// Create a new mono node and connect it to the player
+const mono = new Tone.Mono().toDestination();
+player.connect(mono);
+
 
 playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
@@ -29,12 +36,12 @@ playBButton.addEventListener("click", function() {
     console.log("Play Song B clicked");
 //    songB.currentTime = 0;
 //    songB.play();
-    songB.start();
+    player.start();
 });
 
 pauseBButton.addEventListener("click", function() {
     console.log("Pause Song B clicked");
-    songB.stop();
+    player.stop();
 });
 
 /*
