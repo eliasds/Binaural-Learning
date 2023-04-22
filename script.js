@@ -7,7 +7,7 @@ const osc = new Tone.Oscillator().toDestination();
 
 // Set the frequency and start the oscillator
 osc.frequency.value = 440; // A4
-osc.start();
+// osc.start();
 
 const songA = document.getElementById("songA");
 const songB = document.getElementById("songB");
@@ -18,7 +18,7 @@ const pauseBButton = document.getElementById("pauseB");
 
 playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
-    songA.currentTime = 0;
+//    songA.currentTime = 0;
     songA.play();
 });
 
@@ -29,8 +29,9 @@ pauseAButton.addEventListener("click", function() {
 
 playBButton.addEventListener("click", function() {
     console.log("Play Song B clicked");
-    songB.currentTime = 0;
-    songB.play();
+//    songB.currentTime = 0;
+//    songB.play();
+    osc.start();
 });
 
 pauseBButton.addEventListener("click", function() {
