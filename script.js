@@ -2,15 +2,16 @@
 const player = new Tone.Player("SongA.mp3").toDestination();
 //player.start();
 
+const songA = new Tone.Player("SongA.mp3").toDestination();
+
 // Create a new oscillator and connect it to the default output destination
 const osc = new Tone.Oscillator().toDestination();
-
 // Set the frequency and start the oscillator
 osc.frequency.value = 440; // A4
 // osc.start();
 
-const songA = document.getElementById("songA");
-const songB = document.getElementById("songB");
+//const songA = document.getElementById("songA");
+//const songB = document.getElementById("songB");
 const playAButton = document.getElementById("playA");
 const pauseAButton = document.getElementById("pauseA");
 const playBButton = document.getElementById("playB");
@@ -20,13 +21,13 @@ playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
 //    songA.currentTime = 0;
 //    songA.play();
-    player.start();
+    songA.start();
 });
 
 pauseAButton.addEventListener("click", function() {
     console.log("Pause Song A clicked");
 //    songA.pause();
-    player.stop();
+    songA.stop();
 });
 
 playBButton.addEventListener("click", function() {
