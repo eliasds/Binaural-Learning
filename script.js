@@ -4,8 +4,10 @@ const osc = new Tone.Oscillator().toDestination();
 osc.frequency.value = 440; // A4
 // osc.start();
 
-const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
+const songA = new Tone.Player("SongA.mp3",{playbackRate: 40}).toDestination();
 const songB = new Tone.Player("SongB.mp3").toDestination();
+const monoB = new Tone.Mono().toDestination();
+songB.connect(mono);
 //const songA = document.getElementById("songA");
 //const songB = document.getElementById("songB");
 const playAButton = document.getElementById("playA");
@@ -22,8 +24,6 @@ player.connect(mono);
 
 playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
-//    songA.currentTime = 0;
-//    songA.play();
     songA.start();
 });
 
@@ -34,14 +34,12 @@ pauseAButton.addEventListener("click", function() {
 
 playBButton.addEventListener("click", function() {
     console.log("Play Song B clicked");
-//    songB.currentTime = 0;
-//    songB.play();
-    player.start();
+    songB.start();
 });
 
 pauseBButton.addEventListener("click", function() {
     console.log("Pause Song B clicked");
-    player.stop();
+    songB.stop();
 });
 
 /*
