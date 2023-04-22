@@ -32,7 +32,7 @@ playBButton.addEventListener("click", function() {
     console.log("Play Song B clicked");
 //    songB.currentTime = 0;
 //    songB.play();
-    songB.start();
+    player.start();
 });
 
 pauseBButton.addEventListener("click", function() {
