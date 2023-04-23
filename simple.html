@@ -4,7 +4,7 @@
   <title>My Page</title>
 </head>
 <body>
-  <h1>Tone.js Example 25</h1>
+  <h1>Tone.js Example 26</h1>
   <button id="playButton">Play</button>
   <button id="pauseButton">Pause</button>
   
@@ -25,8 +25,15 @@
     const songA = new Tone.Player(buffer);
     // Create a new GainNode
     const gainA = new Tone.Gain();
+    // Connect the GainNode
     songA.connect(gainA);
-    gainA.toDestination();
+    // Connect the audio signal to the final output destination using Tone.toDestination()
+    // pannerA.connect(Tone.toDestination());
+    // Create a new Mono node
+    const monoA = new Tone.Mono();
+    // Connect the Mono node
+    songA.connect(monoA);
+    monoA.toDestination();
 /**/
     
 /*
