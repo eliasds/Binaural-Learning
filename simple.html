@@ -4,7 +4,7 @@
   <title>My Page</title>
 </head>
 <body>
-  <h1>Tone.js Example 5</h1>
+  <h1>Tone.js Example 10</h1>
   <button id="playButton">Play</button>
   <button id="pauseButton">Pause</button>
   
@@ -15,11 +15,18 @@
 -->
     
   <script>
-/*
-const songA = new Tone.Player("SongA.mp3").toDestination();
-*/
-    
 /**/
+//const songA = new Tone.Player("SongA.mp3").toDestination();
+
+    // Create a new Buffer from the audio file
+    const buffer = new Tone.Buffer("SongA.mp3", () => {
+      console.log("Audio file loaded");
+    });
+    const songA = new Tone.Player(buffer);
+    songA.toDestination();
+/**/
+    
+/*
     // Create a new Player and load the audio file
     const songA = new Tone.Player("SongA.mp3");
     
@@ -43,7 +50,7 @@ const songA = new Tone.Player("SongA.mp3").toDestination();
 
     // Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
     pannerA.connect(Tone.Destination.left);
-/**/
+/*
     
     const playButton = document.getElementById("playButton");
     const pauseButton = document.getElementById("pauseButton");    
