@@ -4,15 +4,47 @@
   <title>My Page</title>
 </head>
 <body>
-  <h1>Tone.js Example 2</h1>
+  <h1>Tone.js Example 3</h1>
   <button id="playButton">Play</button>
   <button id="pauseButton">Pause</button>
   
   <script src="https://unpkg.com/tone"></script>
+<!--
+  <script src="https://unpkg.com/tone"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.29/Tone.js"></script>
+-->
+    
   <script>
     const songA = new Tone.Player("SongA.mp3").toDestination();
+    
+<!--
+    // Create a new Player and load the audio file
+    const songA = new Tone.Player("SongA.mp3");
+    
+    // Create a new GainNode
+    const gainA = new Tone.Gain();
+    
+    // Create a new Mono node
+    const monoA = new Tone.Mono();
+
+    // Create a new Panner node with position set to left
+    const pannerA = new Tone.Panner(-1)
+    
+    // Connect the audio file to the GainNode
+    songA.connect(gainA);
+
+    // Connect the GainNode to the Mono node
+    gainA.connect(monoA);
+
+    // Connect the Mono node to the Panner node
+    monoA.connect(pannerA);
+
+    // Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
+    pannerA.connect(Tone.Destination.left);
+-->
+    
     const playButton = document.getElementById("playButton");
-    const pauseButton = document.getElementById("pauseButton");
+    const pauseButton = document.getElementById("pauseButton");    
 
     playButton.addEventListener("click", () => {
       songA.start();
