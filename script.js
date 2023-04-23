@@ -1,4 +1,4 @@
-const myConstant = "Hello, world! - 56"; // The constant value to be passed to HTML
+const myConstant = "Hello, world! - 57"; // The constant value to be passed to HTML
 const myParagraph = document.getElementById("my-paragraph");
 myParagraph.textContent = myConstant; // Pass the constant value to the HTML element
 
