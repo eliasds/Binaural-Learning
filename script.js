@@ -1,4 +1,4 @@
-const myConstant = "Hello, world! - 41"; // The constant value to be passed to HTML
+const myConstant = "Hello, world! - 42"; // The constant value to be passed to HTML
 const myParagraph = document.getElementById("my-paragraph");
 myParagraph.textContent = myConstant; // Pass the constant value to the HTML element
 
@@ -36,7 +36,8 @@ monoA.connect(pannerA);
 // Connect the audio signal to the final output destination using Tone.toDestination()
 //pannerA.connect(Tone.toDestination());
 //pannerA.connect(Tone.Destination.left);
-const songB = new Tone.Player("SongB.mp3").toDestination();
+//const songB = new Tone.Player("SongB.mp3").toDestination();
+const songB = new Tone.Player("SongB.mp3");
 const monoB = new Tone.Mono().toDestination();
 songB.connect(monoB);
 const playAButton = document.getElementById("playA");
