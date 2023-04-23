@@ -4,7 +4,7 @@
   <title>My Page</title>
 </head>
 <body>
-  <h1>Tone.js Example 28</h1>
+  <h1>Tone.js Example 29</h1>
   <button id="playButton">Play</button>
   <button id="pauseButton">Pause</button>
   
@@ -67,7 +67,8 @@
     songA.connect(pannerA);
 
     // Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
-    pannerA.connect(Tone.Destination.left);
+    //pannerA.connect(Tone.Destination.left);
+    pannerA.toDestination();
 /**/
     
     const playButton = document.getElementById("playButton");
