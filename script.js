@@ -1,4 +1,4 @@
-const myConstant = "Hello, world! - 45"; // The constant value to be passed to HTML
+const myConstant = "Hello, world! - 46"; // The constant value to be passed to HTML
 const myParagraph = document.getElementById("my-paragraph");
 myParagraph.textContent = myConstant; // Pass the constant value to the HTML element
 
@@ -29,7 +29,7 @@ myParagraph.textContent = myConstant; // Pass the constant value to the HTML ele
 // Create a new Player and load the audio file
 //const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
 
-/*
+
 // Create a new Player and load the audio file
 const songA = new Tone.Player("SongA.mp3");
 // Create a new GainNode
@@ -46,21 +46,11 @@ gainA.connect(monoA);
 // Connect the Mono node to the Panner node
 monoA.connect(pannerA);
 // Connect the audio signal to the final output destination using Tone.toDestination()
-//pannerA.connect(Tone.toDestination());
+pannerA.connect(Tone.toDestination());
 // Connect the Panner node to the destination node
 //pannerA.connect(Tone.Destination);
 // Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
-pannerA.connect(Tone.Destination.left);
-*/
-
-//const songB = new Tone.Player("SongB.mp3").toDestination();
-const songB = new Tone.Player("SongB.mp3");
-const monoB = new Tone.Mono().toDestination();
-songB.connect(monoB);
-const playAButton = document.getElementById("playA");
-const pauseAButton = document.getElementById("pauseA");
-const playBButton = document.getElementById("playB");
-const pauseBButton = document.getElementById("pauseB");
+//pannerA.connect(Tone.Destination.left);
 
 playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
@@ -72,6 +62,17 @@ pauseAButton.addEventListener("click", function() {
     songA.stop();
 });
 
+
+/*
+//const songB = new Tone.Player("SongB.mp3").toDestination();
+const songB = new Tone.Player("SongB.mp3");
+const monoB = new Tone.Mono().toDestination();
+songB.connect(monoB);
+const playAButton = document.getElementById("playA");
+const pauseAButton = document.getElementById("pauseA");
+const playBButton = document.getElementById("playB");
+const pauseBButton = document.getElementById("pauseB");
+
 playBButton.addEventListener("click", function() {
     console.log("Play Song B clicked");
     songB.start();
@@ -81,3 +82,4 @@ pauseBButton.addEventListener("click", function() {
     console.log("Pause Song B clicked");
     songB.stop();
 });
+*/
