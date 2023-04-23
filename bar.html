@@ -4,7 +4,7 @@
   <title>My Page</title>
 </head>
 <body>
-  <h1>Tone.js Example 8</h1>
+  <h1>Tone.js Example 9</h1>
   <button id="playButton">Play</button>
   <button id="pauseButton">Pause</button>
   <div id="progressBar" style="width: 0%; background-color: gray;">&nbsp;</div>
@@ -28,8 +28,10 @@
 
     // Create a new Player from the Buffer and connect it to the destination
     //const songA = new Tone.Player(buffer).toDestination();
+    const songA = new Tone.Player(buffer);
+    songA.toDestination();
 
-/**/
+/*
     // Create a new Player and load the audio file
     const songA = new Tone.Player(buffer);
     
@@ -53,7 +55,7 @@
 
     // Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
     pannerA.connect(Tone.Destination.left);
-/**/
+/*
     
     
     // Add event listeners to the play and pause buttons
