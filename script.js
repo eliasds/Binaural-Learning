@@ -21,19 +21,18 @@
 // panner.pan.value = -1.0; // move the sound to the left
 
 
-const songA = new Tone.Player("SongA.mp3".toDestination();
+const songA = new Tone.Player("SongA.mp3");
 const monoA = new Tone.Mono();
 const pannerA = new Tone.Panner(-1);
 // Connect the player to the panner, then to the mono, and then to the left output channel
 songA.connect(monoA);
 monoA.connect(pannerA);
-//pannerA.connect(Tone.Destination.left);
+pannerA.connect(Tone.Destination.left);
 const songB = new Tone.Player("SongB.mp3").toDestination();
-//const monoB = new Tone.Mono().toDestination();
-//songB.connect(monoB);
+const monoB = new Tone.Mono().toDestination();
+songB.connect(monoB);
 //const songA = document.getElementById("songA");
 //const songB = document.getElementById("songB");
-
 const playAButton = document.getElementById("playA");
 const pauseAButton = document.getElementById("pauseA");
 const playBButton = document.getElementById("playB");
