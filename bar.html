@@ -4,7 +4,7 @@
   <title>My Page</title>
 </head>
 <body>
-  <h1>Tone.js Example 13</h1>
+  <h1>Tone.js Example 16</h1>
   <button id="playButton">Play</button>
   <button id="pauseButton">Pause</button>
   <div id="progressBar" style="width: 0%; background-color: gray;">&nbsp;</div>
@@ -27,9 +27,9 @@
     }, "16n");
 
     // Create a new Player from the Buffer and connect it to the destination
-    const songA = new Tone.Player(buffer).toDestination();
-    //const songA = new Tone.Player(buffer);
-    //songA.toDestination();
+    //const songA = new Tone.Player(buffer).toDestination();
+    const songA = new Tone.Player(buffer);
+    songA.toDestination();
 
 /*
     // Create a new Player and load the audio file
