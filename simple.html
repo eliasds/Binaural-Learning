@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Play SongA with Effects</title>
+  </head>
+  <body>
+    <button id="playButton">Play SongA</button>
+    <script src="https://cdn.jsdelivr.net/npm/@tonejs/tone@14.8.26/build/Tone.js"></script>
+    <script>
+      const songA = new Tone.Player("SongA.mp3");
+      const gainA = new Tone.Gain();
+      const monoA = new Tone.Mono();
+      const pannerA = new Tone.Panner(-1);
+      songA.connect(gainA);
+      gainA.connect(monoA);
+      monoA.connect(pannerA);
+      pannerA.connect(Tone.Destination.left);
+      const playButton = document.querySelector("#playButton");
+      playButton.addEventListener("click", () => {
+        songA.start();
+      });
+    </script>
+  </body>
+</html>
