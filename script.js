@@ -1,4 +1,4 @@
-const myConstant = "Hello, world! - 51"; // The constant value to be passed to HTML
+const myConstant = "Hello, world! - 52"; // The constant value to be passed to HTML
 const myParagraph = document.getElementById("my-paragraph");
 myParagraph.textContent = myConstant; // Pass the constant value to the HTML element
 
@@ -25,30 +25,30 @@ myParagraph.textContent = myConstant; // Pass the constant value to the HTML ele
 // Set the pan value to move the sound to the left or right channel
 // panner.pan.value = -1.0; // move the sound to the left
 
-/*
+
 // Create a new Player and load the audio file
-//const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
-const songA = new Tone.Player("SongA.mp3");
+const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
+//const songA = new Tone.Player("SongA.mp3");
 // Connect the audio signal to the final output destination using Tone.toDestination()
-songA.connect(Tone.toDestination());
+//songA.connect(Tone.toDestination());
 // Create a play and puase button trigger
 const playAButton = document.getElementById("playA");
 const pauseAButton = document.getElementById("pauseA");
-*/
 
+
+/*
 // Create a new Player and load the audio file asynchronously
 const songA = new Tone.Player("SongA.mp3", function() {
   // Start playback as soon as the audio file has finished loading
   songA.start();
 });
-
 // Create a new GainNode, Mono node, and Panner node with position set to left
 const gainA = new Tone.Gain();
 const monoA = new Tone.Mono();
 const pannerA = new Tone.Panner(-1);
-
 // Connect the audio file to the GainNode, then to the Mono node, then to the Panner node, and finally to the left channel of the destination node
 songA.chain(gainA, monoA, pannerA, Tone.Destination.left);
+*/
 
 
 /*
