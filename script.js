@@ -20,8 +20,8 @@
 // Set the pan value to move the sound to the left or right channel
 // panner.pan.value = -1.0; // move the sound to the left
 
-const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
-//const songA = new Tone.Player("SongA.mp3");
+//const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
+const songA = new Tone.Player("SongA.mp3");
 //const monoA = new Tone.Mono();
 //const pannerA = new Tone.Panner(-1);
 // Connect the player to the panner, then to the mono, and then to the left output channel
