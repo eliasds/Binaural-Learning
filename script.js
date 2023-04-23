@@ -1,4 +1,4 @@
-const myConstant = "Hello, world! - 52"; // The constant value to be passed to HTML
+const myConstant = "Hello, world! - 53"; // The constant value to be passed to HTML
 const myParagraph = document.getElementById("my-paragraph");
 myParagraph.textContent = myConstant; // Pass the constant value to the HTML element
 
@@ -51,29 +51,41 @@ songA.chain(gainA, monoA, pannerA, Tone.Destination.left);
 */
 
 
-/*
-// Create a new Player and load the audio file
-const songA = new Tone.Player("SongA.mp3");
-// Create a new GainNode
-const gainA = new Tone.Gain();
-// Create a new Mono node
-const monoA = new Tone.Mono();
-// Create a new Panner node with position set to left
-const pannerA = new Tone.Panner(-1);
-//const pannerA = new Tone.Panner(-1).toDestination();
-// Connect the audio file to the GainNode
-songA.connect(gainA);
-// Connect the GainNode to the Mono node
-gainA.connect(monoA);
-// Connect the Mono node to the Panner node
-monoA.connect(pannerA);
-// Connect the audio signal to the final output destination using Tone.toDestination()
-pannerA.connect(Tone.toDestination());
-// Connect the Panner node to the destination node
-//pannerA.connect(Tone.Destination);
-// Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
-//pannerA.connect(Tone.Destination.left);
-*/
+/**/
+        // Create a new Buffer from the audio file
+    const buffer = new Tone.Buffer("SongA.mp3", () => {
+      console.log("Audio file loaded");
+    });
+    
+    // Create a new Player and load the audio file from buffer
+    const songA = new Tone.Player(buffer);
+    
+    // Create a new Player and load the audio file
+    //const songA = new Tone.Player("SongA.mp3");
+    
+    // Create a new GainNode
+    const gainA = new Tone.Gain();
+    
+    // Create a new Mono node
+    const monoA = new Tone.Mono();
+
+    // Create a new Panner node with position set to left
+    const pannerA = new Tone.Panner(-1)
+    
+    // Connect the audio file to the GainNode
+    songA.connect(gainA);
+
+    // Connect the GainNode to the Mono node
+    gainA.connect(monoA);
+
+    // Connect the Mono node to the Panner node
+    monoA.connect(pannerA);
+
+    // Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
+    //pannerA.connect(Tone.Destination.left);
+    //pannerA.toDestination();
+    pannerA.connect(Tone.Destination);
+/**/
 
 playAButton.addEventListener("click", function() {
     console.log("Play Song A clicked");
@@ -86,7 +98,7 @@ pauseAButton.addEventListener("click", function() {
 });
 
 
-/*
+/**/
 //const songB = new Tone.Player("SongB.mp3").toDestination();
 const songB = new Tone.Player("SongB.mp3");
 const monoB = new Tone.Mono().toDestination();
@@ -103,4 +115,4 @@ pauseBButton.addEventListener("click", function() {
     console.log("Pause Song B clicked");
     songB.stop();
 });
-*/
+/**/
