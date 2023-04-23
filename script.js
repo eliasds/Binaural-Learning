@@ -14,7 +14,7 @@ const pauseBButton = document.getElementById("pauseB");
     const bufferA = new Tone.Buffer("SongA.mp3", () => {
       console.log("Audio file loaded");
     });
-    const bufferB = new Tone.Buffer("SongB.mp3", () => {
+    const bufferB = new Tone.Buffer("Puff.mp3", () => {
       console.log("Audio file loaded");
     });
     
