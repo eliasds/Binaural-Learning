@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Play SongA with Effects</title>
-  </head>
-  <body>
-    <button id="playButton">Play SongA</button>
-    <script src="https://cdn.jsdelivr.net/npm/@tonejs/tone@14.8.26/build/Tone.js"></script>
-    <script>
-      const songA = new Tone.Player("SongA.mp3");
-      const gainA = new Tone.Gain();
-      const monoA = new Tone.Mono();
-      const pannerA = new Tone.Panner(-1);
-      songA.connect(gainA);
-      gainA.connect(monoA);
-      monoA.connect(pannerA);
-      pannerA.connect(Tone.Destination.left);
-      const playButton = document.querySelector("#playButton");
-      playButton.addEventListener("click", () => {
-        songA.start();
-      });
-    </script>
-  </body>
+<head>
+  <title>My Page</title>
+</head>
+<body>
+  <h1>Tone.js Example 2</h1>
+  <button id="playButton">Play</button>
+  <button id="pauseButton">Pause</button>
+  
+  <script src="https://unpkg.com/tone"></script>
+  <script>
+    const songA = new Tone.Player("SongA.mp3").toDestination();
+    const playButton = document.getElementById("playButton");
+    const pauseButton = document.getElementById("pauseButton");
+
+    playButton.addEventListener("click", () => {
+      songA.start();
+    });
+
+    pauseButton.addEventListener("click", () => {
+      songA.stop();
+    });
+  </script>
+</body>
 </html>
