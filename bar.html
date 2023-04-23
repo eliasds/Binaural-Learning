@@ -4,7 +4,7 @@
   <title>My Page</title>
 </head>
 <body>
-  <h1>Tone.js Example 22</h1>
+  <h1>Tone.js Example 23</h1>
   <button id="playButton">Play</button>
   <button id="pauseButton">Pause</button>
   <div id="progressBar" style="width: 0%; background-color: gray;">&nbsp;</div>
@@ -31,7 +31,9 @@
     const songA = new Tone.Player(buffer);    
     // Create a new GainNode
     const gainA = new Tone.Gain();
-    songA.toDestination();
+    // Connect the GainNode
+    gainA.connect(songA);
+    gainA.toDestination();
 
 /*
     // Create a new Player and load the audio file
