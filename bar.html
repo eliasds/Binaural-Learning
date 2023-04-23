@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Page</title>
+</head>
+<body>
+  <h1>Tone.js Example 6</h1>
+  <button id="playButton">Play</button>
+  <button id="pauseButton">Pause</button>
+  <div id="progressBar" style="width: 0%; background-color: gray;">&nbsp;</div>
+  <script src="https://unpkg.com/tone"></script>
+  <script>
+    // Create a new Buffer from the audio file
+    const buffer = new Tone.Buffer("SongA.mp3", () => {
+      console.log("Audio file loaded");
+    });
+
+    // Update the progress bar during loading
+    Tone.Transport.scheduleRepeat((time) => {
+      const progress = buffer.loaded / buffer.duration;
+      const progressBar = document.getElementById("progressBar");
+      progressBar.style.width = `${progress * 100}%`;
+      if (progress === 1) {
+        console.log("Loading complete");
+        Tone.Transport.stop();
+      }
+    }, "16n");
+
+    // Create a new Player from the Buffer and connect it to the destination
+    const player = new Tone.Player(buffer).toDestination();
+
+    // Add event listeners to the play and pause buttons
+    const playButton = document.getElementById("playButton");
+    const pauseButton = document.getElementById("pauseButton");
+    playButton.addEventListener("click", () => {
+      player.start();
+      Tone.Transport.start();
+    });
+    pauseButton.addEventListener("click", () => {
+      player.stop();
+      Tone.Transport.stop();
+    });
+  </script>
+</body>
+</html>
