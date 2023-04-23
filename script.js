@@ -1,4 +1,4 @@
-const myConstant = "Hello, world! - 44"; // The constant value to be passed to HTML
+const myConstant = "Hello, world! - 45"; // The constant value to be passed to HTML
 const myParagraph = document.getElementById("my-paragraph");
 myParagraph.textContent = myConstant; // Pass the constant value to the HTML element
 
@@ -29,6 +29,7 @@ myParagraph.textContent = myConstant; // Pass the constant value to the HTML ele
 // Create a new Player and load the audio file
 //const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
 
+/*
 // Create a new Player and load the audio file
 const songA = new Tone.Player("SongA.mp3");
 // Create a new GainNode
@@ -50,7 +51,7 @@ monoA.connect(pannerA);
 //pannerA.connect(Tone.Destination);
 // Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
 pannerA.connect(Tone.Destination.left);
-
+*/
 
 //const songB = new Tone.Player("SongB.mp3").toDestination();
 const songB = new Tone.Player("SongB.mp3");
