@@ -4,7 +4,7 @@
   <title>My Page</title>
 </head>
 <body>
-  <h1>Tone.js Example 6</h1>
+  <h1>Tone.js Example 7</h1>
   <button id="playButton">Play</button>
   <button id="pauseButton">Pause</button>
   <div id="progressBar" style="width: 0%; background-color: gray;">&nbsp;</div>
@@ -27,17 +27,17 @@
     }, "16n");
 
     // Create a new Player from the Buffer and connect it to the destination
-    const player = new Tone.Player(buffer).toDestination();
+    const songA = new Tone.Player(buffer).toDestination();
 
     // Add event listeners to the play and pause buttons
     const playButton = document.getElementById("playButton");
     const pauseButton = document.getElementById("pauseButton");
     playButton.addEventListener("click", () => {
-      player.start();
+      songA.start();
       Tone.Transport.start();
     });
     pauseButton.addEventListener("click", () => {
-      player.stop();
+      songA.stop();
       Tone.Transport.stop();
     });
   </script>
