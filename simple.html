@@ -4,7 +4,7 @@
   <title>My Page</title>
 </head>
 <body>
-  <h1>Tone.js Example 10</h1>
+  <h1>Tone.js Example 11</h1>
   <button id="playButton">Play</button>
   <button id="pauseButton">Pause</button>
   
@@ -19,10 +19,12 @@
 //const songA = new Tone.Player("SongA.mp3").toDestination();
 
     // Create a new Buffer from the audio file
-    const buffer = new Tone.Buffer("SongA.mp3", () => {
-      console.log("Audio file loaded");
-    });
-    const songA = new Tone.Player(buffer);
+    //const buffer = new Tone.Buffer("SongA.mp3", () => {
+    //  console.log("Audio file loaded");
+    //});
+    //const songA = new Tone.Player(buffer);
+    //songA.toDestination();
+    const songA = new Tone.Player("SongA.mp3");
     songA.toDestination();
 /**/
     
