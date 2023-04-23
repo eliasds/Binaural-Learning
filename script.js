@@ -1,3 +1,8 @@
+const myConstant = "Hello, world! - 40"; // The constant value to be passed to HTML
+const myParagraph = document.getElementById("my-paragraph");
+myParagraph.textContent = myConstant; // Pass the constant value to the HTML element
+
+
 // Create a new oscillator and connect it to the default output destination
 // const osc = new Tone.Oscillator().toDestination();
 // Set the frequency and start the oscillator
@@ -22,11 +27,14 @@
 
 //const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
 const songA = new Tone.Player("SongA.mp3");
-//const monoA = new Tone.Mono();
-//const pannerA = new Tone.Panner(-1);
+const monoA = new Tone.Mono();
+const pannerA = new Tone.Panner(-1);
 // Connect the player to the panner, then to the mono, and then to the left output channel
-//songA.connect(monoA);
+songA.connect(monoA);
 //monoA.connect(pannerA);
+monoA.connect(pannerA);
+// Connect the audio signal to the final output destination using Tone.toDestination()
+pannerA.connect(Tone.toDestination());
 //pannerA.connect(Tone.Destination.left);
 const songB = new Tone.Player("SongB.mp3").toDestination();
 const monoB = new Tone.Mono().toDestination();
