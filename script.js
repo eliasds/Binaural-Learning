@@ -22,12 +22,12 @@
 
 const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
 //const songA = new Tone.Player("SongA.mp3");
-const monoA = new Tone.Mono();
-const pannerA = new Tone.Panner(-1);
+//const monoA = new Tone.Mono();
+//const pannerA = new Tone.Panner(-1);
 // Connect the player to the panner, then to the mono, and then to the left output channel
-songA.connect(monoA);
-monoA.connect(pannerA);
-pannerA.connect(Tone.Destination.left);
+//songA.connect(monoA);
+//monoA.connect(pannerA);
+//pannerA.connect(Tone.Destination.left);
 const songB = new Tone.Player("SongB.mp3").toDestination();
 const monoB = new Tone.Mono().toDestination();
 songB.connect(monoB);
