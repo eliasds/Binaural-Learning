@@ -1,4 +1,4 @@
-const myConstant = "Hello, world! - 53"; // The constant value to be passed to HTML
+const myConstant = "Hello, world! - 54"; // The constant value to be passed to HTML
 const myParagraph = document.getElementById("my-paragraph");
 myParagraph.textContent = myConstant; // Pass the constant value to the HTML element
 
@@ -27,7 +27,7 @@ myParagraph.textContent = myConstant; // Pass the constant value to the HTML ele
 
 
 // Create a new Player and load the audio file
-const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
+//const songA = new Tone.Player("SongA.mp3",{playbackRate: 4}).toDestination();
 //const songA = new Tone.Player("SongA.mp3");
 // Connect the audio signal to the final output destination using Tone.toDestination()
 //songA.connect(Tone.toDestination());
@@ -98,7 +98,7 @@ pauseAButton.addEventListener("click", function() {
 });
 
 
-/**/
+/*
 //const songB = new Tone.Player("SongB.mp3").toDestination();
 const songB = new Tone.Player("SongB.mp3");
 const monoB = new Tone.Mono().toDestination();
@@ -115,4 +115,4 @@ pauseBButton.addEventListener("click", function() {
     console.log("Pause Song B clicked");
     songB.stop();
 });
-/**/
+*/
