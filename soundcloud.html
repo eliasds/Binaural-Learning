@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SoundCloud Audio Player</title>
+</head>
+<body>
+  <h1>SoundCloud Audio Player</h1>
+	<div class="audio">
+		<audio id="localAudio"></audio>
+		<div class="controls">
+			<button id="playLocal">Play Local Audio</button>
+			<button id="pauseLocal">Pause Local Audio</button>
+		</div>
+	</div>
+	<div class="audio">
+		<div id="soundCloudAudio"></div>
+		<div class="controls">
+			<button id="playSC">Play SoundCloud Audio</button>
+			<button id="pauseSC">Pause SoundCloud Audio</button>
+		</div>
+	</div>
+	<script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
+	<script>
+		SC.initialize({
+			client_id: 'YOUR_CLIENT_ID',
+		});
+
+		const playLocalButton = document.getElementById("playLocal");
+		const pauseLocalButton = document.getElementById("pauseLocal");
+		const localAudio = document.getElementById("localAudio");
+
+		const playSCButton = document.getElementById("playSC");
+		const pauseSCButton = document.getElementById("pauseSC");
+
+		playLocalButton.addEventListener("click", function() {
+			console.log("Play Local Audio clicked");
+			localAudio.play();
+		});
+
+		pauseLocalButton.addEventListener("click", function() {
+			console.log("Pause Local Audio clicked");
+			localAudio.pause();
+		});
+
+		playSCButton.addEventListener("click", function() {
+			console.log("Play SoundCloud Audio clicked");
+
+			// Load the SoundCloud track
+			SC.stream('/tracks/293', function(sound) {
+
+				// Set up a stereo panner node with a position of -1 for left channel and 1 for right channel
+				const panner = new StereoPannerNode(context, { pan: -1 });
+
+				// Connect the SoundCloud source node to the panner node
+				const sourceNode = context.createMediaElementSource(sound);
+				sourceNode.connect(panner);
+
+				// Connect the panner node to the default audio destination (i.e. the speakers)
+				panner.connect(context.destination);
+
+				// Play the SoundCloud track
+				sound.play();
+			});
+		});
+
+		pauseSCButton.addEventListener("click", function() {
+			console.log("Pause SoundCloud Audio clicked");
+			SC.sound.stop();
+		});
+
+	</script>
+</body>
+</html>
