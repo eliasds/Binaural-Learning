@@ -1,71 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SoundCloud Audio Player</title>
-  </head>
-  <body>
-    <h1>SoundCloud Audio Player</h1>
+<head>
+  <title>SoundCloud Audio Player</title>
+</head>
+<body>
+  <h1>SoundCloud Audio Player</h1>
+	<div class="audio">
+		<audio id="localAudio"></audio>
+		<div class="controls">
+			<button id="playLocal">Play Local Audio</button>
+			<button id="pauseLocal">Pause Local Audio</button>
+		</div>
+	</div>
+	<div class="audio">
+		<div id="soundCloudAudio"></div>
+		<div class="controls">
+			<button id="playSC">Play SoundCloud Audio</button>
+			<button id="pauseSC">Pause SoundCloud Audio</button>
+		</div>
+	</div>
+	<script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
+	<script>
+		SC.initialize({
+			client_id: 'YOUR_CLIENT_ID',
+		});
 
-    <div class="audio">
-      <input type="text" id="soundcloud-url" placeholder="Enter a SoundCloud track URL">
-      <button id="play">Play</button>
-      <button id="pause">Pause</button>
-    </div>
+		const playLocalButton = document.getElementById("playLocal");
+		const pauseLocalButton = document.getElementById("pauseLocal");
+		const localAudio = document.getElementById("localAudio");
 
-    <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
-    <script src="https://unpkg.com/tone"></script>
+		const playSCButton = document.getElementById("playSC");
+		const pauseSCButton = document.getElementById("pauseSC");
 
-    <script>
-      // Initialize the SoundCloud SDK with your app's client ID
-      SC.initialize({
-        client_id: 'YOUR_CLIENT_ID_HERE'
-      });
+		playLocalButton.addEventListener("click", function() {
+			console.log("Play Local Audio clicked");
+			localAudio.play();
+		});
 
-      // Create a new Player
-      const player = new Tone.Player().toDestination();
+		pauseLocalButton.addEventListener("click", function() {
+			console.log("Pause Local Audio clicked");
+			localAudio.pause();
+		});
 
-      // Create a new GainNode
-      const gain = new Tone.Gain().toDestination();
+		playSCButton.addEventListener("click", function() {
+			console.log("Play SoundCloud Audio clicked");
 
-      // Create a new Mono node
-      const mono = new Tone.Mono();
+			// Load the SoundCloud track
+			SC.stream('/tracks/293', function(sound) {
 
-      // Create a new Panner node with position set to left
-      const panner = new Tone.Panner(-1);
+				// Set up a stereo panner node with a position of -1 for left channel and 1 for right channel
+				const panner = new StereoPannerNode(context, { pan: -1 });
 
-      // Connect the Player to the GainNode
-      player.connect(gain);
+				// Connect the SoundCloud source node to the panner node
+				const sourceNode = context.createMediaElementSource(sound);
+				sourceNode.connect(panner);
 
-      // Connect the GainNode to the Mono node
-      gain.connect(mono);
+				// Connect the panner node to the default audio destination (i.e. the speakers)
+				panner.connect(context.destination);
 
-      // Connect the Mono node to the Panner node
-      mono.connect(panner);
+				// Play the SoundCloud track
+				sound.play();
+			});
+		});
 
-      // Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
-      panner.connect(Tone.Destination);
+		pauseSCButton.addEventListener("click", function() {
+			console.log("Pause SoundCloud Audio clicked");
+			SC.sound.stop();
+		});
 
-      // Add a click event listener to the Play button
-      document.getElementById('play').addEventListener('click', function() {
-        const soundcloudUrl = document.getElementById('soundcloud-url').value;
-
-        // Load the audio file from the SoundCloud API using the provided URL
-        SC.get('/resolve', { url: soundcloudUrl }, function(track) {
-          const trackUrl = track.stream_url + '?client_id=YOUR_CLIENT_ID_HERE';
-
-          // Load the audio file into the Player and start playing it
-          player.load(trackUrl, function() {
-            console.log('Audio file loaded');
-            player.start();
-          });
-        });
-      });
-
-      // Add a click event listener to the Pause button
-      document.getElementById('pause').addEventListener('click', function() {
-        console.log('Pause button clicked');
-        player.stop();
-      });
-    </script>
-  </body>
+	</script>
+</body>
 </html>
