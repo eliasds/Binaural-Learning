@@ -4,7 +4,8 @@
 	<title>Simple Script Audio Player</title>
 </head>
 <body>
-	<h1>Tone.js puts one song in the left channel and another in the right</h1>
+	<h1>Simple Script Audio Player V2</h1>
+	<h2>Tone.js puts one song in the left channel and another in the right</h2>
 	<div class="audio">
 		<audio id="songA" src="SongA.mp3"></audio>
 		<audio id="songB" src="Puff.mp3"></audio>
@@ -86,9 +87,40 @@
 				songA.start("+0.1", currentTime);
 			  }
 		});
-*/
+*/		
 		
-		//old pause/play code
+		// initialize pauseTime variable
+		let pauseTimeA = 0;
+		let pauseTimeB = 0;
+
+		// create event listener for play Song A button
+		playButton.addEventListener("click", () => {
+			  // start playback from pauseTimeA
+			  songA.start(undefined, pauseTimeA);
+		});
+
+		// create event listener for pause Song A button
+		pauseButton.addEventListener("click", () => {
+			  // pause playback and store current time
+			  songA.pause();
+			  pauseTimeA = songA.toSeconds(Tone.Transport.position);
+		});
+		
+		// create event listener for play Song B button
+		playButton.addEventListener("click", () => {
+			  // start playback from pauseTimeB
+			  songB.start(undefined, pauseTimeB);
+		});
+
+		// create event listener for pause Song A button
+		pauseButton.addEventListener("click", () => {
+			  // pause playback and store current time
+			  songB.stop();
+			  pauseTimeB = songB.toSeconds(Tone.Transport.position);
+		});
+/*
+		
+		// create event listener for play Song A button
 		playAButton.addEventListener("click", function() {
 			console.log("Play Song A clicked");
 			songA.start();
@@ -96,9 +128,10 @@
 
 		pauseAButton.addEventListener("click", function() {
 			console.log("Pause Song A clicked");
-			songA.pause();
+			songA.stop();
 		});
 
+		// create event listener for play Song A button
 		playBButton.addEventListener("click", function() {
 			console.log("Play Song B clicked");
 			songB.start();
@@ -106,8 +139,10 @@
 
 		pauseBButton.addEventListener("click", function() {
 			console.log("Pause Song B clicked");
-			songB.pause();
-    	});
+			songB.stop();
+    	});	
+*/
+		
 	</script>
 </body>
 </html>
