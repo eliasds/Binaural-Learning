@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Simple Script Audio Player</title>
+	<title>Simple Script Audio Player</title>
 </head>
 <body>
-  <h1>Tone.js puts one song in the left channel and another in the right</h1>
+	<h1>Tone.js puts one song in the left channel and another in the right</h1>
 	<div class="audio">
 		<audio id="songA" src="SongA.mp3"></audio>
 		<audio id="songB" src="Puff.mp3"></audio>
@@ -14,85 +14,100 @@
 			<button id="playB">Play Song B</button>
 			<button id="pauseB">Pause Song B</button>
   
-  <script src="https://unpkg.com/tone"></script>
+	<script src="https://unpkg.com/tone"></script>
 <!--
-  <script src="https://unpkg.com/tone"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.29/Tone.js"></script>
+	<script src="https://unpkg.com/tone"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.29/Tone.js"></script>
 -->
     
-  <script>
-    // Create a play and pause button trigger
-    const playAButton = document.getElementById("playA");
-    const pauseAButton = document.getElementById("pauseA");
-    const playBButton = document.getElementById("playB");
-    const pauseBButton = document.getElementById("pauseB");
+
+	<script>
+		// Create a play and pause button trigger
+		const playAButton = document.getElementById("playA");
+		const pauseAButton = document.getElementById("pauseA");
+		const playBButton = document.getElementById("playB");
+		const pauseBButton = document.getElementById("pauseB");
 
 /**/
-    // Create a new Buffer from the audio file
-    const bufferA = new Tone.Buffer("SongA.mp3", () => {
-      console.log("Audio file loaded");
-    });
-    const bufferB = new Tone.Buffer("Puff.mp3", () => {
-      console.log("Audio file loaded");
-    });
-    
-    // Create a new Player and load the audio file from buffer
-    const songA = new Tone.Player(bufferA);
-    const songB = new Tone.Player(bufferB);
-    
-    // Create a new Player and load the audio file
-    //const songA = new Tone.Player("SongA.mp3");
-    
-    // Create a new GainNode
-    const gainA = new Tone.Gain();
-    const gainB = new Tone.Gain();
+		// Create a new Buffer from the audio file
+		const bufferA = new Tone.Buffer("SongA.mp3", () => {
+		  console.log("Audio file loaded");
+		});
+		const bufferB = new Tone.Buffer("Puff.mp3", () => {
+		  console.log("Audio file loaded");
+		});
 
-    // Create a new Mono node
-    const monoA = new Tone.Mono();
-    const monoB = new Tone.Mono();
+		// Create a new Player and load the audio file from buffer
+		const songA = new Tone.Player(bufferA);
+		const songB = new Tone.Player(bufferB);
 
-    // Create a new Panner node with position set to left
-    const pannerA = new Tone.Panner(-1)
-    const pannerB = new Tone.Panner(1)
-    
-    // Connect the audio file to the GainNode
-    songA.connect(gainA);
-    songB.connect(gainB);
+		// Create a new Player and load the audio file
+		//const songA = new Tone.Player("SongA.mp3");
 
-    // Connect the GainNode to the Mono node
-    gainA.connect(monoA);
-    gainB.connect(monoB);
+		// Create a new GainNode
+		const gainA = new Tone.Gain();
+		const gainB = new Tone.Gain();
 
-    // Connect the Mono node to the Panner node
-    monoA.connect(pannerA);
-    monoB.connect(pannerB);
+		// Create a new Mono node
+		const monoA = new Tone.Mono();
+		const monoB = new Tone.Mono();
 
-    // Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
-    //pannerA.connect(Tone.Destination.left);
-    //pannerA.toDestination();
-    pannerA.connect(Tone.Destination);
-    pannerB.connect(Tone.Destination);
-/**/
+		// Create a new Panner node with position set to left
+		const pannerA = new Tone.Panner(-1)
+		const pannerB = new Tone.Panner(1)
 
-    playAButton.addEventListener("click", function() {
-        console.log("Play Song A clicked");
-        songA.start();
-    });
+		// Connect the audio file to the GainNode
+		songA.connect(gainA);
+		songB.connect(gainB);
 
-    pauseAButton.addEventListener("click", function() {
-        console.log("Pause Song A clicked");
-        songA.stop();
-    });
+		// Connect the GainNode to the Mono node
+		gainA.connect(monoA);
+		gainB.connect(monoB);
 
-    playBButton.addEventListener("click", function() {
-        console.log("Play Song B clicked");
-        songB.start();
-    });
+		// Connect the Mono node to the Panner node
+		monoA.connect(pannerA);
+		monoB.connect(pannerB);
 
-    pauseBButton.addEventListener("click", function() {
-        console.log("Pause Song B clicked");
-        songB.stop();
-    });
-  </script>
+		// Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
+		//pannerA.connect(Tone.Destination.left);
+		//pannerA.toDestination();
+		pannerA.connect(Tone.Destination);
+		pannerB.connect(Tone.Destination);
+/*
+		//new pause/play code
+		playAButton.addEventListener("click", function() {
+			  console.log("Play Song A clicked");
+			  if (songA.state === "stopped") {
+				songA.start();
+			  } else {
+				// get the current position of the player
+				const currentTime = songA.context.currentTime - songA.buffer.duration * songA.playbackRate;
+				// start the player from the current position
+				songA.start("+0.1", currentTime);
+			  }
+		});
+*/
+		
+		//old pause/play code
+		playAButton.addEventListener("click", function() {
+			console.log("Play Song A clicked");
+			songA.start();
+		});
+
+		pauseAButton.addEventListener("click", function() {
+			console.log("Pause Song A clicked");
+			songA.pause();
+		});
+
+		playBButton.addEventListener("click", function() {
+			console.log("Play Song B clicked");
+			songB.start();
+		});
+
+		pauseBButton.addEventListener("click", function() {
+			console.log("Pause Song B clicked");
+			songB.pause();
+    	});
+	</script>
 </body>
 </html>
