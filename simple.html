@@ -4,7 +4,7 @@
 	<title>Simple Script Audio Player</title>
 </head>
 <body>
-	<h1>Simple Script Audio Player V5</h1>
+	<h1>Simple Script Audio Player</h1>
 	<h2>Tone.js puts one song in the left channel and another in the right</h2>
 	<div class="audio">
 		<audio id="songA" src="SongA.mp3"></audio>
@@ -42,9 +42,6 @@
 		const songA = new Tone.Player(bufferA);
 		const songB = new Tone.Player(bufferB);
 
-		// Create a new Player and load the audio file
-		//const songA = new Tone.Player("SongA.mp3");
-
 		// Create a new GainNode
 		const gainA = new Tone.Gain();
 		const gainB = new Tone.Gain();
@@ -69,68 +66,19 @@
 		monoA.connect(pannerA);
 		monoB.connect(pannerB);
 
-		// Connect the Panner node to the left channel of the destination node using Tone.Destination.Left
-		//pannerA.connect(Tone.Destination.left);
-		//pannerA.toDestination();
+		// Connect the Panner node to the destination node using Tone.Destination
 		pannerA.connect(Tone.Destination);
 		pannerB.connect(Tone.Destination);
-/*
-		//new pause/play code
-		playAButton.addEventListener("click", function() {
-			  console.log("Play Song A clicked");
-			  if (songA.state === "stopped") {
-				songA.start();
-			  } else {
-				// get the current position of the player
-				const currentTime = songA.context.currentTime - songA.buffer.duration * songA.playbackRate;
-				// start the player from the current position
-				songA.start("+0.1", currentTime);
-			  }
-		});
-*/		
-/*		
-		// create event listener for play Song A button
-		playButton.addEventListener("click", () => {
-			  // start playback from pauseTimeA
-			  songA.start(undefined, pauseTimeA);
-		});
-
-		// create event listener for pause Song A button
-		pauseButton.addEventListener("click", () => {
-			  // pause playback and store current time
-			  songA.pause();
-			  pauseTimeA = songA.toSeconds(Tone.Transport.position);
-		});
-		
-		// create event listener for play Song B button
-		playButton.addEventListener("click", () => {
-			  // start playback from pauseTimeB
-			  songB.start(undefined, pauseTimeB);
-		});
-
-		// create event listener for pause Song A button
-		pauseButton.addEventListener("click", () => {
-			  // pause playback and store current time
-			  songB.stop();
-			  pauseTimeB = songB.toSeconds(Tone.Transport.position);
-		});
-*/
 /**/
-		// initialize pauseTime variable
-		let pauseTimeA = 0;
-		let pauseTimeB = 0;
 		
 		// create event listener for play Song A button
 		playAButton.addEventListener("click", function() {
 			console.log("Play Song A clicked");
-			// start playback from pauseTimeA
-			songA.start(undefined, pauseTimeA);
-			//songA.start();
+			songA.start();
 		});
 
 		pauseAButton.addEventListener("click", function() {
 			console.log("Pause Song A clicked");
-			pauseTimeA = songA.toSeconds(Tone.Transport.position);
 			songA.stop();
 		});
 
@@ -143,7 +91,7 @@
 		pauseBButton.addEventListener("click", function() {
 			console.log("Pause Song B clicked");
 			songB.stop();
-    	});	
+    		});
 /**/
 		
 	</script>
