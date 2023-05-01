@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SoundCloud Audio Player</title>
-  </head>
-  <body>
-    <h1>SoundCloud Audio Player</h1>
+<head>
+        <title>SoundCloud Audio Player</title>
+</head>
+<body>
+        <h1>SoundCloud Audio Player</h1>
+        
+        
+        <div class="audio">
+              <input type="text" id="soundcloud-url" placeholder="Enter a SoundCloud track URL">
+              <button id="play">Play</button>
+              <button id="pause">Pause</button>
+        </div>
+        
 
-    <div class="audio">
-      <input type="text" id="soundcloud-url" placeholder="Enter a SoundCloud track URL">
-      <button id="play">Play</button>
-      <button id="pause">Pause</button>
-    </div>
-
-    <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
-    <script src="https://unpkg.com/tone"></script>
-
-    <script>
-      // Initialize the SoundCloud SDK with your app's client ID
-      SC.initialize({
-        client_id: 'YOUR_CLIENT_ID_HERE'
-      });
+        <script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
+        <script src="https://unpkg.com/tone"></script>
+        <script>
+        // Initialize the SoundCloud SDK with your app's client ID
+                SC.initialize({
+                        client_id: 'YOUR_CLIENT_ID_HERE'
+                });
 
       // Create a new Player
       const player = new Tone.Player().toDestination();
