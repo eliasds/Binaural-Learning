@@ -4,7 +4,7 @@
 	<title>Simple Script Audio Player</title>
 </head>
 <body>
-	<h1>Simple Script Audio Player V4</h1>
+	<h1>Simple Script Audio Player V5</h1>
 	<h2>Tone.js puts one song in the left channel and another in the right</h2>
 	<div class="audio">
 		<audio id="songA" src="SongA.mp3"></audio>
@@ -130,9 +130,8 @@
 
 		pauseAButton.addEventListener("click", function() {
 			console.log("Pause Song A clicked");
-			songA.pause();
 			pauseTimeA = songA.toSeconds(Tone.Transport.position);
-			//songA.stop();
+			songA.stop();
 		});
 
 		// create event listener for play Song A button
