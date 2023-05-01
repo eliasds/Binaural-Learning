@@ -4,7 +4,7 @@
 	<title>Simple Script Audio Player</title>
 </head>
 <body>
-	<h1>Simple Script Audio Player V2</h1>
+	<h1>Simple Script Audio Player V3</h1>
 	<h2>Tone.js puts one song in the left channel and another in the right</h2>
 	<div class="audio">
 		<audio id="songA" src="SongA.mp3"></audio>
@@ -88,7 +88,7 @@
 			  }
 		});
 */		
-		
+/*		
 		// initialize pauseTime variable
 		let pauseTimeA = 0;
 		let pauseTimeB = 0;
@@ -118,17 +118,22 @@
 			  songB.stop();
 			  pauseTimeB = songB.toSeconds(Tone.Transport.position);
 		});
-/*
+*/
+/**/
 		
 		// create event listener for play Song A button
 		playAButton.addEventListener("click", function() {
 			console.log("Play Song A clicked");
-			songA.start();
+			// start playback from pauseTimeA
+			songA.start(undefined, pauseTimeA);
+			//songA.start();
 		});
 
 		pauseAButton.addEventListener("click", function() {
 			console.log("Pause Song A clicked");
-			songA.stop();
+			songA.pause();
+			pauseTimeA = songA.toSeconds(Tone.Transport.position);
+			//songA.stop();
 		});
 
 		// create event listener for play Song A button
@@ -141,7 +146,7 @@
 			console.log("Pause Song B clicked");
 			songB.stop();
     	});	
-*/
+/**/
 		
 	</script>
 </body>
