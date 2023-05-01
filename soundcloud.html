@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SoundCloud Audio Player</title>
+	<title>SoundCloud Audio Player</title>
 </head>
 <body>
-  <h1>SoundCloud Audio Player</h1>
+	<h1>SoundCloud Audio Player</h1>
+	
+	
 	<div class="audio">
 		<audio id="localAudio"></audio>
 		<div class="controls">
@@ -19,8 +21,12 @@
 			<button id="pauseSC">Pause SoundCloud Audio</button>
 		</div>
 	</div>
+	
+	
 	<script src="https://connect.soundcloud.com/sdk/sdk-3.3.2.js"></script>
+	<script src="https://unpkg.com/tone"></script>
 	<script>
+	// Initialize the SoundCloud SDK with your app's client ID
 		SC.initialize({
 			client_id: 'YOUR_CLIENT_ID',
 		});
