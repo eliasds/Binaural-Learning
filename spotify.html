@@ -12,7 +12,7 @@
 		const redirect_uri = 'https://eliasds.github.io/Binaural-Learning/README.md';
 
 		// Spotify player instance
-		let player;
+		let songA;
 
 		// Connect to Spotify API and start playback
 		function connectToSpotify() {
@@ -23,23 +23,35 @@
 			const scopeUrl = encodeURIComponent(scopes.join(' '));
 			window.location = `${authEndpoint}?client_id=${client_id}&response_type=token&redirect_uri=${redirectUrl}&scope=${scopeUrl}`;
 
-			// Start playback
-			Tone.start().then(() => {
-				player = new Tone.Player().toDestination();
-				player.start();
+			// create event listener for play Song A button
+			playAButton.addEventListener("click", function() {
+				console.log("Play Song A clicked");
+				songA.start();
 			});
+
+			pauseAButton.addEventListener("click", function() {
+				console.log("Pause Song A clicked");
+				songA.stop();
+			});
+
+			// Start playback
+			//Tone.start().then(() => {
+			//	songA = new Tone.Player().toDestination();
+			//	songA.start();
+			//});
 		}
 
 		// Change the panning position of the audio
 		function setPanning(pan) {
-			player.volume.value = -1000 + (pan * 1000);
+			songA.volume.value = -1000 + (pan * 1000);
 		}
 	</script>
 </head>
 <body>
-	<h1>Spotify Player with Tone.js V2</h1>
+	<h1>Spotify Player with Tone.js V3</h1>
 	<h2>Tone.js puts one song in the left channel and another in the right</h2>
 	<button onclick="connectToSpotify()">Connect to Spotify</button>
+	<button onclick="songA.start()">Play</button>
 	<button onclick="setPanning(-1)">Pan Left</button>
 	<button onclick="setPanning(0)">Center</button>
 	<button onclick="setPanning(1)">Pan Right</button>
@@ -48,7 +60,7 @@
 
 
 <script>
-/*
+//*
 
 // Initialize the Spotify Web API with your access token
 const spotifyApi = new SpotifyWebApi();
@@ -90,7 +102,7 @@ spotifyApi.searchTracks(searchTerm).then(function(data) {
     }, 10000);
   });
 });
-*/
+//*/
 </script>
 
 
