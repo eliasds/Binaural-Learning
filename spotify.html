@@ -1,6 +1,3 @@
-let accessToken = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
-let searchTerm = 'puff the magic dragon';
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +5,8 @@ let searchTerm = 'puff the magic dragon';
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.29/Tone.min.js"></script>
 	<script src="https://sdk.scdn.co/spotify-player.js"></script>
 	<script>
+		let accessToken = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
+		let searchTerm = 'puff the magic dragon';
 		// Spotify API credentials
 		const client_id = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
 		const redirect_uri = 'https://eliasds.github.io/Binaural-Learning/README.md';
@@ -38,7 +37,7 @@ let searchTerm = 'puff the magic dragon';
 	</script>
 </head>
 <body>
-	<h1>Spotify Player with Tone.js V1</h1>
+	<h1>Spotify Player with Tone.js V2</h1>
 	<h2>Tone.js puts one song in the left channel and another in the right</h2>
 	<button onclick="connectToSpotify()">Connect to Spotify</button>
 	<button onclick="setPanning(-1)">Pan Left</button>
@@ -48,7 +47,7 @@ let searchTerm = 'puff the magic dragon';
 </html>
 
 
-
+<script>
 /*
 
 // Initialize the Spotify Web API with your access token
@@ -91,9 +90,12 @@ spotifyApi.searchTracks(searchTerm).then(function(data) {
     }, 10000);
   });
 });
+*/
+</script>
 
 
 <script>
+/*
   // Replace YOUR_ACCESS_TOKEN with your Spotify access token
 const accessToken = 'YOUR_ACCESS_TOKEN';
 
@@ -120,6 +122,5 @@ fetch(apiUrl, { headers })
     // Handle any errors
     console.error(error);
   });
-</script>
-
 */
+</script>
