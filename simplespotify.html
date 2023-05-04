@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Spotify Web API Example</title>
+	<script src="https://unpkg.com/@tonejs/tone"></script>
+	<script src="https://sdk.scdn.co/spotify-player.js"></script>
+</head>
+<body>
+
+	<button id="login-button">Log in with Spotify</button>
+	<button id="play-button">Play</button>
+	<button id="pause-button">Pause</button>
+
+	<script>
+    // Spotify Web API credentials
+    var CLIENT_ID = 'YOUR_CLIENT_ID';
+    var REDIRECT_URI = 'http://localhost:8000/callback.html';
+
+    // Initialize the Spotify Web API SDK
+    window.onSpotifyWebPlaybackSDKReady = () => {
+        console.log('Spotify Web Playback SDK is ready');
+    };
+
+    // Initialize the Spotify Web API SDK
+    window.onSpotifyPlayerAPIReady = () => {
+        console.log('Spotify Player API is ready');
+        // Set up the Spotify Web API SDK with our credentials
+        var player = new Spotify.Player({
+            name: 'My Spotify Player',
+            getOAuthToken: function(cb) {
+                // We need to authorize the user to get an access token
+                var accessToken = getAccessToken();
+                if (accessToken) {
+                    cb(accessToken);
+                } else {
+                    openAuthorizeUrl();
+                }
+            }
+        });
+        // Connect to the player and start playback
+        player.connect().then(success => {
+            if (success) {
+                console.log('The Web Playback SDK successfully connected to Spotify!');
+                // Get a random track from Spotify and play it
+                getRandomTrack().then(track => {
+                    console.log('Selected track:', track);
+                    player.resume();
+                    player.play({
+                        uris: [track.uri]
+                    });
+                });
+            }
+        }).catch(error => {
+            console.error(error);
+        });
+        // Listen for playback state changes
+        player.addListener('player_state_changed', state => {
+            console.log('Player state changed:', state);
+        });
+        // Set up the Play button
+        document.querySelector('#play-button').addEventListener('click', () => {
+            player.resume();
+        });
+        // Set up the Pause button
+        document.querySelector('#pause-button').addEventListener('click', () => {
+            player.pause();
+        });
+    };
+
+    // Get an access token for the Spotify Web API
+    function getAccessToken() {
+        var params = getHashParams();
+        return params.access_token;
+    }
+
+    // Get the hash parameters from the URL
+    function getHashParams() {
+        var hashParams = {};
+        var e, r = /([^&;=]+)=?([^&;]*)/g,
+            q = window.location.hash.substring(1);
+        while (e = r.exec(q)) {
+            hashParams[e[1]] = decodeURIComponent(e[2]);
+        }
+        return hashParams;
+    }
+
+    // Open the Spotify Web API authorization URL
+    function openAuthorizeUrl() {
+        var url = 'https://accounts.spotify.com/authorize';
+        url += '?response_type=token';
+        url += '&client_id=' + encodeURIComponent(CLIENT_ID);
+        url += '&redirect_uri=' + encodeURIComponent(REDIRECT_URI);
+        url += '&scope=' + encodeURIComponent('user-read-playback-state user-modify-playback-state');
+        window.location = url;
+    }
+
+    // Get a random track from Spotify
+    async function getRandomTrack() {
+        var accessToken = getAccessToken();
+        var response = await fetch('https://api.spotify.com/v1/me/top/tracks', {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+        var data = await response.json();
+        var index = Math.floor(Math.random() * data.items.length);
+        return data.items[index];
+    }
+
+
+  </script>
+</body>
+</html>
