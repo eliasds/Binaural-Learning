@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Spotify Web API Example v2</title>
-	<script src="https://unpkg.com/tone"></script>
+	<title>Spotify Web API Example</title>
+	<!-- use this one --> <script src="https://unpkg.com/tone"></script>
+	<script src="tone.js"></script> <!--local file-->
 	<script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
+	<h1>Spotify Web API Example v4</h1>
 
 	<button id="login-button">Log in with Spotify</button>
 	<button id="play-button">Play</button>
@@ -54,6 +56,7 @@
         }).catch(error => {
             console.error(error);
         });
+	    
         // Listen for playback state changes
         player.addListener('player_state_changed', state => {
             console.log('Player state changed:', state);
@@ -68,11 +71,43 @@
         });
     };
 
+/* either this:
     // Get an access token for the Spotify Web API
     function getAccessToken() {
         var params = getHashParams();
-        return params.access_token;
+        var accessToken = params.access_token;
+	  if (accessToken) {
+	    // Store the access token in localStorage
+	    localStorage.setItem('access_token', accessToken);
+	  }
+	  return accessToken;
+	}
+	// Check if an access token exists in localStorage
+	function checkAccessToken() {
+	  return !!localStorage.getItem('access_token');
+	}
+*/
+		
+/* or this */
+// Get an access token for the Spotify Web API
+function getAccessToken() {
+    // Check if the access token is stored in localStorage
+    var accessToken = localStorage.getItem('spotifyAccessToken');
+    if (accessToken) {
+        return accessToken;
+    } else {
+        // Check if the access token is in the URL hash
+        var params = getHashParams();
+        accessToken = params.access_token;
+        if (accessToken) {
+            // Store the access token in localStorage
+            localStorage.setItem('spotifyAccessToken', accessToken);
+            return accessToken;
+        } else {
+            return null;
+        }
     }
+}
 
     // Get the hash parameters from the URL
     function getHashParams() {
@@ -94,7 +129,7 @@
         url += '&scope=' + encodeURIComponent('user-read-playback-state user-modify-playback-state');
         window.location = url;
     }
-
+/* this */
     // Get a random track from Spotify
     async function getRandomTrack() {
         var accessToken = getAccessToken();
@@ -107,7 +142,20 @@
         var index = Math.floor(Math.random() * data.items.length);
         return data.items[index];
     }
+/**/
 
+/* or this 
+// Get a random track from the Spotify Web API
+function getRandomTrack() {
+    return fetch('https://api.spotify.com/v1/me/top/tracks', {
+        headers: {
+            'Authorization': 'Bearer ' + getAccessToken()
+        }
+    }).then(response => response.json())
+      .then(data => {
+        // Select a random track from the user's top tracks
+        var tracks =
+*/	    
 
   </script>
 </body>
