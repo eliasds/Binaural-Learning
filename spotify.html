@@ -6,26 +6,24 @@
 	<script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
-	<h1>Spotify Player with Tone.js V4</h1>
+	<h1>Spotify Player with Tone.js V6</h1>
 	<h2>Tone.js puts one song in the left channel and another in the right</h2>
 	<button onclick="connectToSpotify()">Connect to Spotify</button>
 	<button onclick="songA.start()">Play</button>
 	<button onclick="setPanning(-1)">Pan Left</button>
 	<button onclick="setPanning(0)">Center</button>
 	<button onclick="setPanning(1)">Pan Right</button>
-	
-	<!--
 	<div class="controls">
 		<button id="playA">Play Song A</button>
-	-->
+		<button id="pauseA">Pause Song A</button>
+		<button id="playB">Play Song B</button>
+		<button id="pauseB">Pause Song B</button>
 
 	<script>
 		//let accessToken = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
-		//let searchTerm = 'puff the magic dragon';
 		// Spotify API credentials
 		const client_id = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
 		const redirect_uri = 'https://eliasds.github.io/Binaural-Learning/redirect.html';
-		//const redirect_uri = 'https://eliasds.github.io/Binaural-Learning/spotify.html';
 		
 		// Create a play and pause button trigger
 		const playAButton = document.getElementById("playA");
