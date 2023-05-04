@@ -5,11 +5,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.29/Tone.min.js"></script>
 	<script src="https://sdk.scdn.co/spotify-player.js"></script>
 	<script>
-		let accessToken = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
-		let searchTerm = 'puff the magic dragon';
+		//let accessToken = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
+		//let searchTerm = 'puff the magic dragon';
 		// Spotify API credentials
 		const client_id = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
 		const redirect_uri = 'https://eliasds.github.io/Binaural-Learning/README.md';
+		//const redirect_uri = 'https://eliasds.github.io/Binaural-Learning/spotify.html';
 
 		// Spotify player instance
 		let songA;
@@ -48,15 +49,13 @@
 	</script>
 </head>
 <body>
-	<h1>Spotify Player with Tone.js V3</h1>
+	<h1>Spotify Player with Tone.js V4</h1>
 	<h2>Tone.js puts one song in the left channel and another in the right</h2>
 	<button onclick="connectToSpotify()">Connect to Spotify</button>
 	<button onclick="songA.start()">Play</button>
 	<button onclick="setPanning(-1)">Pan Left</button>
 	<button onclick="setPanning(0)">Center</button>
 	<button onclick="setPanning(1)">Pan Right</button>
-</body>
-</html>
 
 
 <script>
@@ -136,3 +135,6 @@ fetch(apiUrl, { headers })
   });
 */
 </script>
+
+</body>
+</html>
