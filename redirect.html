@@ -1,26 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Redirect to Spotify Player with Tone.js</title>
-	<script>
-		<!-- These used to work -->
-		//<meta http-equiv="refresh" content="0; URL='https://eliasds.github.io/Binaural-Learning/simplespotify.html'" />
-		//window.location = "https://eliasds.github.io/Binaural-Learning/simplespotify.html";
-		//window.location.href = "https://eliasds.github.io/Binaural-Learning/simplespotify.html";
-		//window.location.assign("https://eliasds.github.io/Binaural-Learning/simplespotify.html");
-		//window.location.replace("https://eliasds.github.io/Binaural-Learning/simplespotify.html");
-			
-		// Get the access token from the URL hash
-		const token = window.location.hash.substring(1).split('&')[0].split('=')[1];
-		// Store the access token in localStorage
-		localStorage.setItem('access_token', token);
-		// Redirect back to the original page
-		window.location.href = 'https://eliasds.github.io/Binaural-Learning/simplespotify.html';
-	</script>
-	
-</head>
-</body>
-	<h1>Redirect to Spotify Player v6</h1>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+      // get the access token from the URL hash
+      const accessToken = window.location.hash.substr(1).split('&')[0].split('=')[1];
+      // set the access token in local storage
+      localStorage.setItem('accessToken', accessToken);
+      // redirect to the main page
+      window.location.href = 'https://eliasds.github.io/Binaural-Learning/simplespotify.html';
+    </script>
+  </head>
+  <body>
+	<h1>Redirect to Spotify Player v7</h1>
 </body>
 </html>
 
