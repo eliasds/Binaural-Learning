@@ -6,7 +6,7 @@
 	<script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
-	<h1>Spotify Web API Example v14</h1>
+	<h1>Spotify Web API Example v15</h1>
 
 	
 	<script>
@@ -21,7 +21,7 @@ const auth_url = `https://accounts.spotify.com/authorize?client_id=${client_id}&
 window.location.href = auth_url;
 
 // After authentication, we can use the Fetch API to get data from the Spotify API
-const access_token = params.access_token;
+const access_token = localStorage.getItem('accessToken');
 
 const headers = {
   'Authorization': `Bearer ${access_token}`
