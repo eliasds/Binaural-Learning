@@ -6,74 +6,32 @@
 	<script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
-	<h1>Spotify Web API Example v11</h1>
+	<h1>Spotify Web API Example v12</h1>
 
-	<button id="connect-button">Connect to Spotify</button>
-	<button id="play-button" disabled>Play</button>
-	<button id="pause-button" disabled>Pause</button>
 	
 	<script>
 		
-    // Spotify Web API credentials
-    const CLIENT_ID = 'f1692e4b1b6d44d4bafa58860c5cf9ca';		
-    const REDIRECT_URI = 'https://eliasds.github.io/Binaural-Learning/redirect.html';
-    const SCOPES = 'user-read-playback-state user-modify-playback-state';
+   // First, we need to authenticate the user with Spotify
+const client_id = 'your_client_id';
+const redirect_uri = 'http://localhost:3000/callback';
+const scope = 'user-read-private user-read-email';
+const auth_url = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&redirect_uri=${redirect_uri}&scope=${scope}`;
 
-		// Check if the access token is stored in localStorage
-		const token = localStorage.getItem('access_token');
-		if (token) {
-			// Initialize the Spotify Web Playback SDK
-			window.onSpotifyWebPlaybackSDKReady = () => {
-				console.log('Spotify Web Playback SDK is ready');
-				initializePlayer(token);
-			};
-		} else {
-			// Display the connect button
-			document.querySelector('#connect-button').style.display = 'block';
-		}
+// Redirect the user to the authentication URL
+window.location.href = auth_url;
 
-		// Initialize the Spotify Web Playback SDK with the access token
-		function initializePlayer(token) {
-			// Initialize the Spotify Web Playback SDK
-			window.onSpotifyPlayerAPIReady = () => {
-				console.log('Spotify Player API is ready');
-				// Set up the Spotify Web Playback SDK with our credentials
-				const player = new Spotify.Player({
-					name: 'My Spotify Player',
-					getOAuthToken: (cb) => {
-						cb(token);
-					}
-				});
-				// Connect to the player and start playback
-				player.connect().then(success => {
-					if (success) {
-						console.log('The Web Playback SDK successfully connected to Spotify!');
-						document.querySelector('#play-button').disabled = false;
-						document.querySelector('#pause-button').disabled = false;
-					}
-				}).catch(error => {
-					console.error(error);
-				});
-				// Listen for playback state changes
-				player.addListener('player_state_changed', state => {
-					console.log('Player state changed:', state);
-				});
-				// Set up the Play button
-				document.querySelector('#play-button').addEventListener('click', () => {
-					player.resume();
-				});
-				// Set up the Pause button
-				document.querySelector('#pause-button').addEventListener('click', () => {
-					player.pause();
-				});
-			};
-		}
+// After authentication, we can use the Fetch API to get data from the Spotify API
+const access_token = 'your_access_token';
+const headers = {
+  'Authorization': `Bearer ${access_token}`
+};
+const url = 'https://api.spotify.com/v1/me';
 
-		// Connect to Spotify
-		document.querySelector('#connect-button').addEventListener('click', () => {
-			const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${encodeURIComponent(SCOPES)}`;
-			window.location.href = url;
-		});
+fetch(url, { headers })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
 	</script>
 </body>
 </html>
