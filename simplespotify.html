@@ -8,7 +8,7 @@
 	<script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
-	<h1>Spotify Web API Example v6</h1>
+	<h1>Spotify Web API Example v7</h1>
 
 	<button id="login-button">Log in with Spotify</button>
 	<button id="play-button">Play</button>
@@ -17,9 +17,9 @@
 	<script>
     // Spotify Web API credentials
     const CLIENT_ID = 'f1692e4b1b6d44d4bafa58860c5cf9ca';		
-    //const REDIRECT_URI = 'https://eliasds.github.io/Binaural-Learning/redirect.html';
+    const REDIRECT_URI = 'https://eliasds.github.io/Binaural-Learning/redirect.html';
     const SCOPES = 'user-read-playback-state user-modify-playback-state';
-    const REDIRECT_URI = 'http://localhost:8000/callback.html';
+    
 
 // Check if the access token is stored in localStorage
 const token = localStorage.getItem('access_token');
