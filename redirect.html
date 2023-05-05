@@ -3,17 +3,23 @@
 <head>
 	<title>Redirect to Spotify Player with Tone.js</title>
 	<!-- Any of these should work-->
-	<meta http-equiv="refresh" content="0; URL='https://eliasds.github.io/Binaural-Learning/spotify.html'" />
-	
+	//<meta http-equiv="refresh" content="0; URL='https://eliasds.github.io/Binaural-Learning/spotify.html'" />
 	<script>
 		//window.location = "https://eliasds.github.io/Binaural-Learning/spotify.html";
 		//window.location.href = "https://eliasds.github.io/Binaural-Learning/spotify.html";
 		//window.location.assign("https://eliasds.github.io/Binaural-Learning/spotify.html");
 		//window.location.replace("https://eliasds.github.io/Binaural-Learning/spotify.html");
+		
+		// Get the access token from the URL hash
+		const token = window.location.hash.substring(1).split('&')[0].split('=')[1];
+		// Store the access token in localStorage
+		localStorage.setItem('access_token', token);
+		// Redirect back to the original page
+		window.location.href = 'spotify.html';
 	</script>
+	
 </head>
 </body>
-	<h1>Redirect to Spotify Player with Tone.js</h1>
-	<h2>Tone.js puts one song in the left channel and another in the right</h2>
+	<h1>Redirect to Spotify Player v3</h1>
 </body>
 </html>
