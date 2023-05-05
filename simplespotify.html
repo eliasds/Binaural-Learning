@@ -6,33 +6,21 @@
 	<script src="https://sdk.scdn.co/spotify-player.js"></script>
 </head>
 <body>
-	<h1>Spotify Web API Example v15</h1>
+	<h1>Spotify Web API Example v16</h1>
 
+	<button onclick="authenticate()">Authenticate with Spotify</button>
 	
 	<script>
-		
-   // First, we need to authenticate the user with Spotify
-const client_id = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
-const redirect_uri = 'https://eliasds.github.io/Binaural-Learning/redirect.html';
-const scope = 'user-read-private user-read-email';
-const auth_url = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&redirect_uri=${redirect_uri}&scope=${scope}`;
+		function authenticate() {
+		   // First, we need to authenticate the user with Spotify
+			const client_id = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
+			const redirect_uri = 'https://eliasds.github.io/Binaural-Learning/redirect.html';
+			const scope = 'user-read-private user-read-email';
+			const auth_url = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&redirect_uri=${redirect_uri}&scope=${scope}`;
 
-// Redirect the user to the authentication URL
-window.location.href = auth_url;
-
-// After authentication, we can use the Fetch API to get data from the Spotify API
-const access_token = localStorage.getItem('accessToken');
-
-const headers = {
-  'Authorization': `Bearer ${access_token}`
-};
-const url = 'https://api.spotify.com/v1/me';
-
-fetch(url, { headers })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-
+			// Redirect the user to the authentication URL
+			window.location.href = auth_url;
+		}
 	</script>
 </body>
 </html>
