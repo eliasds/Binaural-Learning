@@ -15,7 +15,7 @@ var cookieParser = require('cookie-parser');
 
 var client_id = 'f1692e4b1b6d44d4bafa58860c5cf9ca'; // Your client id
 var client_secret = '8ff25be359644a799aa4a36a311bd7cb'; // Your secret
-var redirect_uri = 'https://localhost:8888/callback'; // Your redirect uri
+var redirect_uri = 'https://localhost:3000'; // Your redirect uri
 //var redirect_uri = 'https://eliasds.github.io/Binaural-Learning/redirect.html'; // Your redirect uri
 
 /**
