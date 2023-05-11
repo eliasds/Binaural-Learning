@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jamendo Web API Example</title>
+	<script src="https://unpkg.com/tone"></script>
+</head>
+<body>
+	<h1>Jamendo Web API Example V2</h1>
+
+	<button onclick="authenticate()">Authenticate with Jamendo</button>
+	<button onclick="fetchRandomSong()">Fetch Random Song</button>
+
+	<script>
+		const clientId = '69073f3b';
+		const redirectUri = 'https://eliasds.github.io/Binaural-Learning/redirect.html';
+		const responseType = 'token';
+		const scope = 'basic';
+
+		function authenticate() {
+			const authUrl = `https://api.jamendo.com/v3.0/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
+			window.location.href = authUrl;
+		}
+
+		function fetchRandomSong() {
+			const accessToken = localStorage.getItem('accessToken');
+			if (!accessToken) {
+				console.log('Access token not found. Please authenticate first.');
+				return;
+			}
+
+			const apiUrl = 'https://api.jamendo.com/v3.0/tracks/?format=json&limit=1&order=random';
+			fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					if (data.results && data.results.length > 0) {
+						const songUrl = data.results[0].audio;
+						playSong(songUrl);
+					} else {
+						console.log('No songs found.');
+					}
+				})
+				.catch(error => console.error(error));
+		}
+
+		function playSong(songUrl) {
+			const panner = new Tone.Panner(-1);
+			const player = new Tone.Player(songUrl).connect(panner).toDestination();
+			player.autostart = true;
+		}
+
+		// Check if access token is present in the URL hash and save it in local storage
+		const accessToken = window.location.hash.substr(1).split('&')[0].split('=')[1];
+		if (accessToken) {
+			localStorage.setItem('accessToken', accessToken);
+		}
+	</script>
+</body>
+</html>
