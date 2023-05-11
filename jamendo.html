@@ -5,7 +5,7 @@
 	<script src="https://unpkg.com/tone"></script>
 </head>
 <body>
-	<h1>Jamendo Web API Example V2</h1>
+	<h1>Jamendo Web API Example V3</h1>
 
 	<button onclick="authenticate()">Authenticate with Jamendo</button>
 	<button onclick="fetchRandomSong()">Fetch Random Song</button>
@@ -13,7 +13,8 @@
 	<script>
 		const clientId = '69073f3b';
 		const redirectUri = 'https://eliasds.github.io/Binaural-Learning/redirect.html';
-		const responseType = 'token';
+		//const responseType = 'token';
+		const responseType = 'code';
 		const scope = 'basic';
 
 		function authenticate() {
@@ -21,31 +22,32 @@
 			window.location.href = authUrl;
 		}
 
-		function fetchRandomSong() {
-			const accessToken = localStorage.getItem('accessToken');
-			if (!accessToken) {
-				console.log('Access token not found. Please authenticate first.');
-				return;
-			}
+	
 
-			const apiUrl = 'https://api.jamendo.com/v3.0/tracks/?format=json&limit=1&order=random';
-			fetch(apiUrl)
-				.then(response => response.json())
-				.then(data => {
-					if (data.results && data.results.length > 0) {
-						const songUrl = data.results[0].audio;
-						playSong(songUrl);
-					} else {
-						console.log('No songs found.');
-					}
-				})
-				.catch(error => console.error(error));
+
+		// Fetch a random song from Jamendo using JSONP
+		function fetchRandomSong() {
+			const apiUrl = `https://api.jamendo.com/v3.0/tracks/?format=json&limit=1&order=random&client_id=${clientId}&callback=${callbackFunctionName}`;
+
+			// Create a new script element to make the JSONP request
+			const script = document.createElement('script');
+			script.src = apiUrl;
+			document.head.appendChild(script);
 		}
 
-		function playSong(songUrl) {
+		// Callback function to handle the response
+		function myCallback(response) {
+			console.log(response);
+
+			// Extract the song information from the response
+			const song = response.results[0];
+			const songUrl = song.audio;
+
+			// Play the song using Tone.js and panner
+			const player = new Tone.Player(songUrl).toDestination();
 			const panner = new Tone.Panner(-1);
-			const player = new Tone.Player(songUrl).connect(panner).toDestination();
-			player.autostart = true;
+			player.connect(panner);
+			player.start();
 		}
 
 		// Check if access token is present in the URL hash and save it in local storage
