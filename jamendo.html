@@ -5,7 +5,7 @@
 	<script src="https://unpkg.com/tone"></script>
 </head>
 <body>
-	<h1>Jamendo Web API Example V3</h1>
+	<h1>Jamendo Web API Example V4</h1>
 
 	<button onclick="authenticate()">Authenticate with Jamendo</button>
 	<button onclick="fetchRandomSong()">Fetch Random Song</button>
@@ -16,14 +16,12 @@
 		//const responseType = 'token';
 		const responseType = 'code';
 		const scope = 'basic';
+		const callbackFunctionName = 'myCallback';
 
 		function authenticate() {
 			const authUrl = `https://api.jamendo.com/v3.0/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
 			window.location.href = authUrl;
 		}
-
-	
-
 
 		// Fetch a random song from Jamendo using JSONP
 		function fetchRandomSong() {
