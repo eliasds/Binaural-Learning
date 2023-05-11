@@ -5,7 +5,7 @@
 	<script src="https://unpkg.com/tone"></script>
 </head>
 <body>
-	<h1>Jamendo Web API Example V4</h1>
+	<h1>Jamendo Web API Example V5</h1>
 
 	<button onclick="authenticate()">Authenticate with Jamendo</button>
 	<button onclick="fetchRandomSong()">Fetch Random Song</button>
@@ -33,12 +33,14 @@
 			document.head.appendChild(script);
 		}
 
+
 		// Callback function to handle the response
 		function myCallback(response) {
 			console.log(response);
 
 			// Extract the song information from the response
 			const song = response.results[0];
+			console.log(song); // Log the song object to inspect its structure
 			const songUrl = song.audio;
 
 			// Play the song using Tone.js and panner
