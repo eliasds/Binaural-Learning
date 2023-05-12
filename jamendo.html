@@ -5,7 +5,7 @@
 	<script src="https://unpkg.com/tone"></script>
 </head>
 <body>
-	<h1>Jamendo Web API Example V9</h1>
+	<h1>Jamendo Web API Example V10</h1>
 
 	<button onclick="authenticate()">Authenticate with Jamendo</button>
 	<button onclick="fetchRandomSong()">Fetch Random Song</button>
@@ -27,27 +27,25 @@
 
 		// Function to fetch track information
 		function fetchTrackInfo() {
-		    const apiUrl = `https://api.jamendo.com/v3.0/tracks/?client_id=${clientId}&id=${trackId}`;
-		    fetch(apiUrl)
-			.then(response => response.json())
-			.then(data => {
-			    if (data.results.length > 0) {
-				const track = data.results[0];
-				const audioUrl = track.audio;
-				// Use the audio URL to download or stream the audio file
-				console.log('Audio URL:', audioUrl);
-				// Play the track using Tone.js and panner
-				const player = new Tone.Player(audioUrl).toDestination();
-				const panner = new Tone.Panner(-1);
-				player.connect(panner);
-				player.start();
-			    } else {
-				console.log('Track not found');
-			    }
-			})
-			.catch(error => {
-			    console.log('Error:', error);
-			});
+			const apiUrl = `https://api.jamendo.com/v3.0/tracks/?client_id=${clientId}&id=${trackId}`;
+			fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					if (data.results.length > 0) {
+						const track = data.results[0];
+						const audioUrl = track.audio;
+						// Use the audio URL to download or stream the audio file
+						console.log('Audio URL:', audioUrl);
+						// Play the track using Tone.js
+						const player = new Tone.Player(audioUrl).toDestination();
+						player.autostart = true;
+					} else {
+						console.log('Track not found');
+					}
+				})
+				.catch(error => {
+					console.log('Error:', error);
+				});
 		}
 		
 		// Fetch a random song from Jamendo using JSONP
@@ -59,10 +57,6 @@
 			script.src = apiUrl;
 			document.head.appendChild(script);
 		}
-		
-		// Play the track using Tone.js
-		const player = new Tone.Player("https://prod-1.storage.jamendo.com/?trackid=2026253&format=mp31&from=kkTX8pGhOXNoyPUwafKQMg%3D%3D%7C1yrKOWLIOkyGDN1e3PYa%2BA%3D%3D").toDestination();
-		player.autostart = true;
 
 
 		// Callback function to handle the response
@@ -74,11 +68,9 @@
 			console.log(song); // Log the song object to inspect its structure
 			const songUrl = song.audio;
 
-			// Play the song using Tone.js and panner
+			// Play the song using Tone.js
 			const player = new Tone.Player(songUrl).toDestination();
-			const panner = new Tone.Panner(-1);
-			player.connect(panner);
-			player.start();
+			player.autostart = true;
 		}
 		
 		// Check if access token is present in the URL query parameters and save it in local storage
