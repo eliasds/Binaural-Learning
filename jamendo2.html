@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jamendo Web API Example</title>
+	<script src="https://unpkg.com/tone"></script>
+	<style>
+		.disabled {
+			opacity: 0.5;
+			pointer-events: none;
+		}
+	</style>
+</head>
+<body>
+	<h1>Jamendo Web API Example V1</h1>
+
+	<button id="authenticateButton" onclick="authenticate()">Authenticate</button>
+	<button id="fetchButton" onclick="fetchRandomTrack()" class="disabled">Fetch Random Track</button>
+	<div id="trackInfo"></div>
+
+	<script>
+		const clientId = '69073f3b'; // Replace with your Jamendo API client ID
+		const redirectUri = 'https://eliasds.github.io/Binaural-Learning/redirect.html'; // Replace with your redirect URI
+		const responseType = 'code';
+		const scope = 'basic';
+
+		function authenticate() {
+			const authUrl = `https://api.jamendo.com/v3.0/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
+			window.location.href = authUrl;
+		}
+
+		function enableFetchButton() {
+			const fetchButton = document.getElementById('fetchButton');
+			fetchButton.classList.remove('disabled');
+			fetchButton.disabled = false;
+		}
+
+		function fetchRandomTrack() {
+			const apiUrl = `https://api.jamendo.com/v3.0/tracks/?format=json&limit=1&random=true&client_id=${clientId}`;
+			fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					if (data.results.length > 0) {
+						const track = data.results[0];
+						displayTrackInfo(track);
+					} else {
+						console.log('No random tracks found');
+					}
+				})
+				.catch(error => {
+					console.log('Error:', error);
+				});
+		}
+
+		function displayTrackInfo(track) {
+			const trackInfo = document.getElementById('trackInfo');
+			trackInfo.innerHTML = `
+				<h2>Track Information</h2>
+				<p>Title: ${track.name}</p>
+				<p>Artist: ${track.artist_name}</p>
+				<p>Album: ${track.album_name}</p>
+			`;
+		}
+
+		// Check if access token is present in the URL query parameters
+		const urlParams = new URLSearchParams(window.location.search);
+		const code = urlParams.get('code');
+		if (code) {
+			// Save the access token or perform further authentication steps
+			// ...
+			// Once authenticated, enable the "Fetch Random Track" button
+			enableFetchButton();
+			// Disable the "Authenticate" button
+			const authenticateButton = document.getElementById('authenticateButton');
+			authenticateButton.classList.add('disabled');
+			authenticateButton.disabled = true;
+		}
+	</script>
+</body>
+</html>
