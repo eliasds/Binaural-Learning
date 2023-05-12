@@ -11,7 +11,7 @@
 	</style>
 </head>
 <body>
-	<h1>Jamendo Web API Example V3</h1>
+	<h1>Jamendo Web API Example V4</h1>
 
 		<button id="authenticateButton" onclick="authenticate()">Authenticate</button>
 		<p id="authInfo"></p>
@@ -22,7 +22,6 @@
 		const responseType = 'code';
 		const scope = 'basic';
 
-		
         function authenticate() {
             const authUrl = `https://api.jamendo.com/v3.0/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
             window.location.href = authUrl;
@@ -34,6 +33,7 @@
         if (code) {
             document.getElementById('authenticateButton').disabled = true;
             document.getElementById('authInfo').textContent = `Authentication successful! Code: ${code}`;
+
             // Store the access token in local storage
             localStorage.setItem('accessToken', code);
         }
@@ -45,10 +45,13 @@
         if (accessToken) {
             // Access token is available, you can use it in your code
             console.log('Access Token:', accessToken);
+            document.getElementById('authInfo').textContent += `\nAccess Token: ${accessToken}`;
         } else {
             // Access token is not available or not set
             console.log('Access Token not found');
+            document.getElementById('authInfo').textContent += '\nAccess Token not found';
         }
     </script>
 </body>
 </html>
+
