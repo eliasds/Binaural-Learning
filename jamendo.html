@@ -5,12 +5,11 @@
 	<script src="https://unpkg.com/tone"></script>
 </head>
 <body>
-	<h1>Jamendo Web API Example V10</h1>
+	<h1>Jamendo Web API Example V11</h1>
 
 	<button onclick="authenticate()">Authenticate with Jamendo</button>
-	<button onclick="fetchRandomSong()">Fetch Random Song</button>
-	<button onclick="fetchTrackInfo()">Fetch track info & Play</button>
-	
+	<button onclick="fetchRandomTrack()">Fetch Random Track</button>
+	<button id="playButton">Play Song A</button>
 	
 	<script>
 		const clientId = '69073f3b'; // Replace with your Jamendo API client ID
@@ -18,15 +17,15 @@
 		const responseType = 'code';
 		const scope = 'basic';
 		const callbackFunctionName = 'myCallback';
-		const trackId = 2026253; // Replace with the ID of the track you want to retrieve
+		const trackId = 2026253; // Replace with the ID of the track you want to retrieve	
 
 		function authenticate() {
 			const authUrl = `https://api.jamendo.com/v3.0/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
 			window.location.href = authUrl;
 		}
-
+		
 		// Function to fetch track information
-		function fetchTrackInfo() {
+		function fetchTrackInfo(trackId) {
 			const apiUrl = `https://api.jamendo.com/v3.0/tracks/?client_id=${clientId}&id=${trackId}`;
 			fetch(apiUrl)
 				.then(response => response.json())
@@ -36,9 +35,6 @@
 						const audioUrl = track.audio;
 						// Use the audio URL to download or stream the audio file
 						console.log('Audio URL:', audioUrl);
-						// Play the track using Tone.js
-						const player = new Tone.Player(audioUrl).toDestination();
-						player.autostart = true;
 					} else {
 						console.log('Track not found');
 					}
@@ -47,18 +43,57 @@
 					console.log('Error:', error);
 				});
 		}
-		
-		// Fetch a random song from Jamendo using JSONP
-		function fetchRandomSong() {
-			const apiUrl = `https://api.jamendo.com/v3.0/tracks/?format=json&limit=1&order=random&client_id=${clientId}&callback=${callbackFunctionName}`;
 
-			// Create a new script element to make the JSONP request
-			const script = document.createElement('script');
-			script.src = apiUrl;
-			document.head.appendChild(script);
+		function displayTrackInfo(track) {
+			if (track) {
+				console.log('Track:', track);
+				// Display the track information on your page
+			} else {
+				console.log('Track not found');
+			}
+		}
+		
+		function playSong(audioUrl) {
+			if (audioUrl) {
+				const player = new Tone.Player(audioUrl).toDestination();
+				player.autostart = true;
+			} else {
+				console.log('Invalid audio URL');
+			}
+		}
+		
+		// Fetch a random track and display its information
+		function fetchRandomTrack() {
+			const apiUrl = `https://api.jamendo.com/v3.0/tracks/?format=json&limit=1&order=random&client_id=${clientId}`;
+			return fetch(apiUrl)
+				.then(response => response.json())
+				.then(data => {
+					if (data.results.length > 0) {
+						const track = data.results[0];
+						const trackId = track.id;
+						console.log('Track ID:', trackId);
+						displayTrackInfo(track);
+						return trackId;
+					} else {
+						console.log('No random tracks found');
+						return null;
+					}
+				})
+				.catch(error => {
+					console.log('Error:', error);
+					return null;
+				});
 		}
 
-
+		// Event listener for the play button
+		document.getElementById('playButton').addEventListener('click', function() {
+			fetchTrackInfo(trackId)
+				.then(audioUrl => {
+					playSong(audioUrl);
+				});
+		});
+		
+		
 		// Callback function to handle the response
 		function myCallback(response) {
 			console.log(response);
