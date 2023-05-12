@@ -5,7 +5,7 @@
 	<script src="https://unpkg.com/tone"></script>
 </head>
 <body>
-	<h1>Jamendo Web API Example V6</h1>
+	<h1>Jamendo Web API Example V7</h1>
 
 	<button onclick="authenticate()">Authenticate with Jamendo</button>
 	<button onclick="fetchRandomSong()">Fetch Random Song</button>
@@ -18,7 +18,7 @@
 		const responseType = 'code';
 		const scope = 'basic';
 		const callbackFunctionName = 'myCallback';
-		const trackId = 123; // Replace with the ID of the track you want to retrieve
+		const trackId = 2026253; // Replace with the ID of the track you want to retrieve
 
 		function authenticate() {
 			const authUrl = `https://api.jamendo.com/v3.0/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
