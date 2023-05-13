@@ -8,16 +8,26 @@
       const accessToken = window.location.hash.substr(1).split('&')[0].split('=')[1];
       // set the access token in local storage
       localStorage.setItem('accessToken', accessToken);
-      // redirect to the main page
-      window.location.href = 'https://eliasds.github.io/Binaural-Learning/jamendo2.html';
-    </script>
-  </head>
-  <body>
-	<h1>Redirect to Jamendo Player v2</h1>
+	    
+    // Get the referring URL
+    const referringUrl = document.referrer;
+    // Define the redirect URLs based on the referring URL
+    const redirectUrls = {
+      'https://eliasds.github.io/Binaural-Learning/spotify.html': 'https://eliasds.github.io/Binaural-Learning/spotify.html',
+      'https://eliasds.github.io/Binaural-Learning/simplespotify.html': 'https://eliasds.github.io/Binaural-Learning/simplespotify.html',
+      'https://eliasds.github.io/Binaural-Learning/jamendo.html': 'https://eliasds.github.io/Binaural-Learning/jamendo.html',
+      'https://eliasds.github.io/Binaural-Learning/jamendo2.html': 'https://eliasds.github.io/Binaural-Learning/jamendo2.html',
+      // Add more URL mappings as needed
+    };
+    
+    // Get the corresponding redirect URL based on the referring URL
+    const redirectUrl = redirectUrls[referringUrl] || 'https://eliasds.github.io/Binaural-Learning';
+    
+    // Redirect to the appropriate destination
+    window.location.href = redirectUrl;
+  </script>
+</head>
+<body>
+  <h1>Redirecting...</h1>
 </body>
 </html>
-
-
-
-
-
