@@ -6,7 +6,7 @@
   <title>Spotify API Example</title>
 </head>
 <body>
-  <h1>Spotify Player V1</h1>
+  <h1>Spotify Player Vdsa</h1>
   <script>
     // Authorization token that must have been created previously. See: https://developer.spotify.com/documentation/web-api/concepts/authorization
     const token = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
@@ -28,6 +28,7 @@ async function getTopTracks(){
   )).items;
 }
 
+/*
 const topTracks = await getTopTracks();
 console.log(
   topTracks?.map(
@@ -35,6 +36,25 @@ console.log(
       `${name} by ${artists.map(artist => artist.name).join(', ')}`
   )
 );
+*/
+
+async function displayTopTracks() {
+  const topTracks = await getTopTracks();
+  const trackList = topTracks?.map(
+    ({ name, artists }) =>
+      `${name} by ${artists.map(artist => artist.name).join(', ')}`
+  );
+  const trackListElement = document.createElement('ul');
+  trackList.forEach(track => {
+    const trackItem = document.createElement('li');
+    trackItem.textContent = track;
+    trackListElement.appendChild(trackItem);
+  });
+  document.body.appendChild(trackListElement);
+}
+
+// Call the function to display top tracks when the page loads
+displayTopTracks();
 
   </script>
 </body>
