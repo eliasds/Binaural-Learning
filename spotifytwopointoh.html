@@ -9,7 +9,6 @@
   <script>
     // Authorization token that must have been created previously. See: https://developer.spotify.com/documentation/web-api/concepts/authorization
     const token = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
-
     async function fetchWebApi(endpoint, method, body) {
       const res = await fetch(`https://api.spotify.com/${endpoint}`, {
         headers: {
@@ -48,3 +47,4 @@
   </script>
 </body>
 </html>
+
