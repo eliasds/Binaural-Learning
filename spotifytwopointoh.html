@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spotify API Example</title>
-</head>
-<body>
-  <h1>Spotify Player Vdsa</h1>
-  <script>
-    // Authorization token that must have been created previously. See: https://developer.spotify.com/documentation/web-api/concepts/authorization
-    const token = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
-    async function fetchWebApi(endpoint, method, body) {
-      const res = await fetch(`https://api.spotify.com/${endpoint}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        method,
-        body: JSON.stringify(body)
-      });
-      return await res.json();
-    }
+// Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
+const token = 'BQDZY9U_yw-OwPlprODa-NQWQMqdUtmt6mpDAf4vWr3-6EEA37FdcBbS263bCYDqnibywpHLg9or4YWc6v0ktPkgx5XrzRpDajhiNBS7jsa8owYt9XB_8etPR5M-mqS4uCGE3EtB093D7tlA2Kv4CWIfxqKwcOs3VxvxXrKCinQy0ESPbu_n7cTwR3B8UrehtGTdd40bfzr7GtcA_Mkny59DSKQ6q7QY0xPmgSvHu-sOakc7ojfmih91llV1eNSO';
+async function fetchWebApi(endpoint, method, body) {
+  const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    method,
+    body:JSON.stringify(body)
+  });
+  return await res.json();
+}
 
 async function getTopTracks(){
   // Endpoint reference : https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
@@ -28,7 +18,6 @@ async function getTopTracks(){
   )).items;
 }
 
-/*
 const topTracks = await getTopTracks();
 console.log(
   topTracks?.map(
@@ -36,27 +25,3 @@ console.log(
       `${name} by ${artists.map(artist => artist.name).join(', ')}`
   )
 );
-*/
-
-async function displayTopTracks() {
-  const topTracks = await getTopTracks();
-  const trackList = topTracks?.map(
-    ({ name, artists }) =>
-      `${name} by ${artists.map(artist => artist.name).join(', ')}`
-  );
-  const trackListElement = document.createElement('ul');
-  trackList.forEach(track => {
-    const trackItem = document.createElement('li');
-    trackItem.textContent = track;
-    trackListElement.appendChild(trackItem);
-  });
-  document.body.appendChild(trackListElement);
-}
-
-// Call the function to display top tracks when the page loads
-displayTopTracks();
-
-  </script>
-</body>
-</html>
-
