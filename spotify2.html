@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Spotify Player with Tone.js</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.29/Tone.min.js"></script>
+	<script src="https://sdk.scdn.co/spotify-player.js"></script>
+</head>
+<body>
+	<h1>Spotify Player with Tone.js V6 abc</h1>
+	<h2>Tone.js puts one song in the left channel and another in the right</h2>
+	<button onclick="connectToSpotify()">Connect to Spotify</button>
+	<button onclick="songA.start()">Play</button>
+	<button onclick="setPanning(-1)">Pan Left</button>
+	<button onclick="setPanning(0)">Center</button>
+	<button onclick="setPanning(1)">Pan Right</button>
+	<div class="controls">
+		<button id="playA">Play Song A</button>
+		<button id="pauseA">Pause Song A</button>
+		<button id="playB">Play Song B</button>
+		<button id="pauseB">Pause Song B</button>
+
+	<script>
+		//let accessToken = 'f1692e4b1b6d44d4bafa58860c5cf9ca';
+		// Spotify API credentials
+		const client_id = 'BQBdN4fJlbd3xRxedkU_GNTwJcz8YRnufeiDoGGH0985giOxF7xOHxbFRwCk0dBZH_SJNjRC_oublFmCvLlJ5fB4ZieA-bCsrcOZ0vgGkswI9YF906uhzhntpHHtxRbSY0f5K_RunoH0nirfxFNdG1-eeYwsbcktVdJwrEWse5Tp-02Sp79fdZU2OHNoGEedzixF';
+		const redirect_uri = 'https://eliasds.github.io/Binaural-Learning/redirect.html';
+		
+		// Create a play and pause button trigger
+		const playAButton = document.getElementById("playA");
+		const pauseAButton = document.getElementById("pauseA");
+		const playBButton = document.getElementById("playB");
+		const pauseBButton = document.getElementById("pauseB");
+
+		// Spotify player instance
+		let songA;
+
+		// Connect to Spotify API and start playback
+		function connectToSpotify() {
+			// Authenticate with Spotify API
+			const authEndpoint = 'https://accounts.spotify.com/authorize';
+			const scopes = ['user-read-playback-state', 'user-modify-playback-state'];
+			const redirectUrl = encodeURIComponent(redirect_uri);
+			const scopeUrl = encodeURIComponent(scopes.join(' '));
+			window.location = `${authEndpoint}?client_id=${client_id}&response_type=token&redirect_uri=${redirectUrl}&scope=${scopeUrl}`;
+
+			// create event listener for play Song A button
+			playAButton.addEventListener("click", function() {
+				console.log("Play Song A clicked");
+				songA.start();
+			});
+
+			pauseAButton.addEventListener("click", function() {
+				console.log("Pause Song A clicked");
+				songA.stop();
+			});
+
+			// Start playback
+			//Tone.start().then(() => {
+			//	songA = new Tone.Player().toDestination();
+			//	songA.start();
+			//});
+		}
+
+		// Change the panning position of the audio
+		function setPanning(pan) {
+			songA.volume.value = -1000 + (pan * 1000);
+		}
+	</script>
+<script>
+//*
+
+// Initialize the Spotify Web API with your access token
+const spotifyApi = new SpotifyWebApi();
+spotifyApi.setAccessToken(accessToken);
+
+// Search for a track
+spotifyApi.searchTracks(searchTerm).then(function(data) {
+  // Get the first track from the search results
+  const track = data.body.tracks.items[0];
+
+  // Get the audio features for the track
+  spotifyApi.getAudioFeaturesForTrack(track.id).then(function(audioFeatures) {
+    // Load the audio file using Tone.js
+    const audioFile = new Tone.Buffer(track.preview_url);
+
+    // Create a Web Audio context and nodes
+    const context = new AudioContext();
+    const source = context.createBufferSource();
+    const panner = context.createPanner();
+    const gainNode = context.createGain();
+
+    // Set the audio file as the source for the buffer node
+    source.buffer = audioFile.get();
+
+    // Set the panning position
+    panner.setPosition(audioFeatures.loudness, 0, 1 - Math.abs(audioFeatures.loudness));
+
+    // Connect the nodes together
+    source.connect(panner);
+    panner.connect(gainNode);
+    gainNode.connect(context.destination);
+
+    // Start playing the audio
+    source.start();
+
+    // Pause the audio after 10 seconds
+    setTimeout(function() {
+      source.stop();
+    }, 10000);
+  });
+});
+//*/
+</script>
+
+
+<script>
+/*
+  // Replace YOUR_ACCESS_TOKEN with your Spotify access token
+const accessToken = 'YOUR_ACCESS_TOKEN';
+
+// Replace ARTIST_ID with the Spotify ID of the artist you want to retrieve tracks for
+const artistId = 'ARTIST_ID';
+
+// Set up the API endpoint URL
+const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`;
+
+// Set up the API request headers
+const headers = {
+  Authorization: `Bearer ${accessToken}`,
+  'Content-Type': 'application/json',
+};
+
+// Make the API request
+fetch(apiUrl, { headers })
+  .then(response => response.json())
+  .then(data => {
+    // Handle the response data
+    console.log(data);
+  })
+  .catch(error => {
+    // Handle any errors
+    console.error(error);
+  });
+*/
+</script>
+
+</body>
+</html>
